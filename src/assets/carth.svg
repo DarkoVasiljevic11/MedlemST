@@ -1,0 +1,20 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+>
+  <!-- Cart -->
+  <path
+    d="M6.3 5H21L19 12H7.38M20 16H8L6 3H3M9 20C9 20.55 8.55 21 8 21C7.45 21 7 20.55 7 20C7 19.45 7.45 19 8 19C8.55 19 9 19.45 9 20ZM20 20C20 20.55 19.55 21 19 21C18.45 21 18 20.55 18 20C18 19.45 18.45 19 19 19C19.55 19 20 19.45 20 20Z"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Honey jar -->
+  <path
+    d="M11 7.5H14.5V8.5H15C15.55 8.5 16 8.95 16 9.5V12C16 12.55 15.55 13 15 13H10.5C9.95 13 9.5 12.55 9.5 12V9.5C9.5 8.95 9.95 8.5 10.5 8.5H11V7.5Z"
+    fill="#F4C542"
+  />
+</svg>
