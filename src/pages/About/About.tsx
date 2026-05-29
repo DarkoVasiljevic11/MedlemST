@@ -4,28 +4,28 @@ import GallerySection from "./Gallery";
 function About() {
   return (
     <>
-        <section className="w-full bg-[#fff8ef] py-20 px-6 overflow-x-hidden">
+        <section className="w-full bg-cream py-20 px-6 overflow-x-hidden">
       
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-12">
 
         {/* LEFT TEXT */}
         <div className="w-full lg:w-1/2 space-y-6">
           
-          <span className="uppercase tracking-[0.25em] text-sm text-[#a15c18] font-semibold font-bree">
+          <span className="uppercase tracking-[0.25em] text-sm text-brown font-semibold font-bree">
             Porodična tradicija
           </span>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-[#4a2d0f] leading-tight font-bree">
+          <h2 className="text-4xl md:text-5xl font-bold text-brown leading-tight font-bree">
             Prirodan med iz srca prirode
           </h2>
 
-          <p className="text-lg text-[#5e4a35] leading-relaxed font-bree">
+          <p className="text-lg text-brown leading-relaxed font-bree">
             Naša proizvodnja se temelji na dugogodišnjem iskustvu pčelarstva i
             ljubavi prema prirodi. Svaka kap meda dolazi iz čistih livada i
             šuma bez industrijskih uticaja.
           </p>
 
-          <p className="text-lg text-[#5e4a35] leading-relaxed font-bree">
+          <p className="text-lg text-brown leading-relaxed font-bree">
             Posvećeni smo kvalitetu, tradiciji i održivom načinu rada koji
             čuva prirodu za buduće generacije.
           </p>
@@ -50,8 +50,8 @@ function About() {
 
       </div>
     </section>
-    <div className="w-full flex justify-center my-10">
-  <div className="w-2 h-2 bg-[#d6a86b] rounded-full opacity-60" />
+    <div className="w-full flex justify-center my-5">
+  <div className="w-2 h-2 bg-honey rounded-full opacity-60" />
 </div>
     <GallerySection />
 

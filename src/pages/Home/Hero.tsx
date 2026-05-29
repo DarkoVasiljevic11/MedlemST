@@ -15,7 +15,7 @@ export default function Hero(){
 
       {/* Content */}
       <div className="relative z-10 flex h-full items-center justify-center ">
-        <h1 className="text-4xl text-brownt text-center font-bree font-style:italic">
+        <h1 className="text-4xl text-brown text-center font-bree font-style:italic">
           <span className="text-honey">Sladak</span> spoj prirode! 
         </h1>
       </div>

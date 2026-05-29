@@ -11,7 +11,7 @@ export default function Instagram(){
     viewBox="0 0 640 640"
     className="
       w-8 h-8
-      fill-current text-gray-700
+      fill-current text-cream
       transition-colors duration-300
       group-hover:text-honey
     "

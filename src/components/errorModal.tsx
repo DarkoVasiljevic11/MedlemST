@@ -16,19 +16,19 @@ export default function ErrorModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm text-center"
+        className="bg-cream rounded-2xl shadow-xl p-6 w-full max-w-sm text-center"
       >
         <h2 className="text-xl font-bold text-red-600 mb-3">
           Greška
         </h2>
 
-        <p className="text-gray-700 mb-6">
+        <p className="text-brown mb-6">
           {message}
         </p>
 
         <button
           onClick={onClose}
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+          className="bg-honey hover:bg-red-600 hover:text-cream text-brown px-4 py-2 rounded-lg cursor-pointer"
         >
           OK
         </button>

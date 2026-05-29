@@ -8,43 +8,68 @@ export function CartProvider({ children }: any) {
     return saved ? JSON.parse(saved) : [];
   });
 
-  // SAVE TO LOCALSTORAGE EVERY CHANGE
+  // SAVE TO LOCALSTORAGE
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-{/*Add to cart*/ }
-  const addToCart = (item: any) => {
+
+  // ADD TO CART (FIXED SAFETY NORMALIZATION)
+  const addToCart = (newItem: any) => {
+    const normalizedItem = {
+      ...newItem,
+
+      // 🔥 ensure image always exists under ONE key
+      image: newItem.image || newItem.imageUrl || newItem.img || "",
+
+      // safety fallback for price/size
+      price: newItem.price ?? 0,
+      size: newItem.size ?? "default",
+      quantity: newItem.quantity ?? 1,
+    };
+
     setCart((prev) => {
-      const existing = prev.find((p) => p.id === item.id);
+      const existing = prev.find(
+        (item) =>
+          item.id === normalizedItem.id &&
+          item.size === normalizedItem.size
+      );
 
       if (existing) {
-        return prev.map((p) =>
-          p.id === item.id
-            ? { ...p, quantity: p.quantity + item.quantity }
-            : p
+        return prev.map((item) =>
+          item.id === normalizedItem.id &&
+          item.size === normalizedItem.size
+            ? {
+                ...item,
+                quantity: item.quantity + normalizedItem.quantity,
+              }
+            : item
         );
       }
 
-      return [...prev, item];
+      return [...prev, normalizedItem];
     });
   };
-{/*Remove form cart one by one*/ }
- const removeFromCart = (id: number) => {
-  setCart(prev =>
-    prev
-      .map(item =>
-        item.id === id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-      .filter(item => item.quantity > 0)
-  );
-};
-{/*Clear cart*/ }
+
+  // REMOVE ONE ITEM
+  const removeFromCart = (id: number | string, size?: string) => {
+    setCart((prev) =>
+      prev
+        .map((item) =>
+          item.id === id && item.size === size
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  // CLEAR CART
   const clearCart = () => setCart([]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -1,13 +1,32 @@
 import { useState } from "react";
 import { useCart } from "./CartContext";
+
 interface ProductCardProps {
   id: number | string;
   image: string;
   title: string;
   category: string;
-  description: string;
-  price:number;
-  onAddToCart?: (item: {id:number | string; title: string; category: string; quantity: number;price:number }) => void;
+  description: {
+    des: string;
+    prof: string[];
+    tec: string[];
+  };
+  price?: number;
+
+  variants?: {
+    size: string;
+    price: number;
+  }[];
+
+  onAddToCart?: (item: {
+    id: number | string;
+    title: string;
+    category: string;
+    size: string;
+    image: string;
+    quantity: number;
+    price: number;
+  }) => void;
 }
 
 export default function ProductCard({
@@ -16,157 +35,408 @@ export default function ProductCard({
   title,
   category,
   description,
-  price
+  variants,
 }: ProductCardProps) {
   const [quantity, setQuantity] = useState("1");
   const [showModal, setShowModal] = useState(false);
-const increase = () => {
-  setQuantity((prev) => String(Math.min(Number(prev) + 1, 99)));
-};
- const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
 
-  // allow empty while typing
-  if (value === "") {
-    setQuantity("");
-    return;
-  }
+  const { addToCart } = useCart();
 
-  const num = Number(value);
+  const safeVariants = variants ?? [];
 
-  if (!isNaN(num) && num >= 1 && num <= 99) {
-    setQuantity(value);
-  }
+  const [selectedVariant, setSelectedVariant] = useState(
+    safeVariants[0] || null
+  );
+
+  const price = selectedVariant?.price ?? 0;
+
+  const formatPrice = (price: number) => `${price} RSD`;
+
+  const increase = () => {
+    setQuantity((prev) => String(Math.min(Number(prev) + 1, 99)));
   };
 
   const decrease = () => {
-      if (Number(quantity) > 1) {
-    setQuantity((prev) => String(Number(prev) - 1));
-  }
+    if (Number(quantity) > 1) {
+      setQuantity((prev) => String(Number(prev) - 1));
+    }
   };
-const { addToCart } = useCart();
-  const handleAddToCart = () => {
-  addToCart({
-    id,
-    title,
-    category,
-    quantity:Number(quantity),
-    price
-  });
 
-  setQuantity("1");
-};
-const formatPrice = (price:number) => `${price} RSD`;
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    if (value === "") {
+      setQuantity("");
+      return;
+    }
+
+    const num = Number(value);
+
+    if (!isNaN(num) && num >= 1 && num <= 99) {
+      setQuantity(value);
+    }
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id,
+      title,
+      category,
+      image,
+      quantity: Number(quantity),
+      price: selectedVariant?.price ?? price,
+      size: selectedVariant?.size,
+    });
+
+    setQuantity("1");
+  };
+
   return (
-    <div className="w-full max-w-sm overflow-hidden rounded-2xl bg-white shadow-lg transition duration-300 hover:shadow-xl">
-      
+    <div className="w-full max-w-sm overflow-hidden rounded-3xl bg-[#fff8ef] shadow-lg transition duration-300 hover:shadow-2xl">
       {/* Product Image */}
-      <div className="h-64 overflow-hidden bg-gray-100">
+      <div className="h-64 bg-[#f5f1ea] flex items-center justify-center p-5 overflow-hidden">
         <img
           src={image ?? "../../src/assets/proizvodimed/medkolekcija"}
           alt={title ?? "Med"}
-          className="cursor-pointer h-full w-full object-cover transition duration-300 hover:scale-105"
+          className="
+            cursor-pointer
+            max-h-full
+            max-w-full
+            object-contain
+            transition
+            duration-300
+            hover:scale-105
+          "
           onClick={() => setShowModal(true)}
         />
       </div>
 
       {/* Product Info */}
-      <div className="p-5">
-        <p className="mb-1 text-sm font-medium text-dhoney overflow-hidden ">
+      <div className="flex flex-col items-center text-center p-5">
+        <p className="mb-2 text-sm font-medium tracking-wide text-dhoney uppercase">
           {category ?? "Med"}
         </p>
 
-        <h2 className="text-2 font-bold text-brownt line-clamp-2">
+        <h2 className="text-lg font-bold text-brownt mb-4 leading-snug">
           {title ?? "Med"}
         </h2>
 
-        <p className="mt-2 text-sm text-brownt line-clamp-3">
-          {description ?? "Med"}
-        </p>
+        {/* Variants */}
+        {safeVariants?.length > 0 && (
+          <div className="flex bg-gray-200 p-1 rounded-full w-fit mb-5">
+            {safeVariants.map((v) => (
+              <button
+                key={v.size}
+                onClick={() => setSelectedVariant(v)}
+                className={`
+                  px-4
+                  py-1.5
+                  rounded-full
+                  text-sm
+                  font-medium
+                  transition
+                  cursor-pointer
+                  ${
+                    selectedVariant?.size === v.size
+                      ? "bg-honey text-brown shadow-sm"
+                      : "text-brown hover:bg-honey"
+                  }
+                `}
+              >
+                {v.size}
+              </button>
+            ))}
+          </div>
+        )}
 
-        <p className="mt-2 text-sm font-bold text-brownt line-clamp-3">
-          {formatPrice(price)}
-        </p>
+        {/* Price + Quantity */}
+        <div className="flex items-center justify-center gap-4 mb-5 flex-wrap">
+          <p className="text-lg font-bold text-brownt">
+            {selectedVariant?.price
+              ? formatPrice(selectedVariant.price)
+              : formatPrice(price)}
+          </p>
 
-        {/* Bottom controls */}
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-  
-  {/* Quantity Selector */}
-  <div className="flex items-center justify-between rounded-lg border border-gray-300 w-full sm:w-auto">
-    <button
-      onClick={decrease}
-      className="px-4 py-2 text-xl font-bold text-brownt transition hover:bg-gray-100 cursor-pointer"
-    >
-      -
-    </button>
+          {/* Quantity Selector */}
+          <div className="flex items-center rounded-xl border border-gray-300 bg-white overflow-hidden shadow-sm">
+            <button
+              onClick={decrease}
+              className="
+                px-3
+                py-2
+                text-lg
+                font-bold
+                text-brownt
+                transition
+                hover:bg-gray-100
+                cursor-pointer
+              "
+            >
+              −
+            </button>
 
-      <input
-        type="number"
-         min="1"
-         max="99"
-  value={quantity}
-  onChange={handleInput}
-  onBlur={() => {
-    if (quantity === "" || Number(quantity) < 1) {
-      setQuantity("1");
-    }
-  }}
-        className="
-          w-16
-          h-10
-          text-center
-          rounded-lg
-          outline-none
-          focus:ring-2
-          focus:ring-dhoney
-          [appearance:textfield]
-          [&::-webkit-outer-spin-button]:appearance-none
-          [&::-webkit-inner-spin-button]:appearance-none
-        "
-      />
+            <input
+              type="number"
+              min="1"
+              max="99"
+              value={quantity}
+              onChange={handleInput}
+              onBlur={() => {
+                if (quantity === "" || Number(quantity) < 1) {
+                  setQuantity("1");
+                }
+              }}
+              className="
+                w-12
+                h-10
+                text-center
+                font-semibold
+                outline-none
+                bg-transparent
+                [appearance:textfield]
+                [&::-webkit-outer-spin-button]:appearance-none
+                [&::-webkit-inner-spin-button]:appearance-none
+              "
+            />
 
-    <button
-      onClick={increase}
-      className="px-4 py-2 text-xl font-bold text-brownt transition hover:bg-gray-100 cursor-pointer"
-    >
-      +
-    </button>
-  </div>
+            <button
+              onClick={increase}
+              className="
+                px-3
+                py-2
+                text-lg
+                font-bold
+                text-brownt
+                transition
+                hover:bg-gray-100
+                cursor-pointer
+              "
+            >
+              +
+            </button>
+          </div>
+        </div>
 
-  {/* Add to Cart Button */}
-  <button
-    onClick={handleAddToCart}
-    className="w-full sm:w-auto rounded-lg  bg-dhoney px-5 py-3 font-semibold text-brownt transition hover:bg-yellow-600 cursor-pointer"
-  >
-    Dodajte u korpu
-  </button>
-    {/* Modal Picture */}
+        {/* Add to Cart */}
+        <button
+          onClick={handleAddToCart}
+          className="
+            rounded-xl
+            bg-honey
+            px-5
+            py-2.5
+            text-sm
+            font-semibold
+            text-brownt
+            transition
+            hover:bg-honey
+            hover:scale-[1.02]
+            shadow-md
+            cursor-pointer
+          "
+        >
+          Dodajte u korpu
+        </button>
+      </div>
+
+      {/* Modal */}
       {showModal && (
         <div
           onClick={() => setShowModal(false)}
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          className="
+            fixed
+            inset-0
+            z-50
+            bg-black/80
+            backdrop-blur-sm
+            flex
+            items-center
+            justify-center
+            p-4
+          "
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-3xl w-full"
+            className="
+              relative
+              w-full
+              max-w-6xl
+              bg-white
+              rounded-3xl
+              overflow-hidden
+              shadow-2xl
+              flex
+              flex-col
+              md:flex-row
+            "
           >
+            {/* Close Button */}
             <button
               onClick={() => setShowModal(false)}
-              className="cursor-pointer absolute -top-3 -right-3 bg-ghoney rounded-full w-10 h-10 shadow-lg text-black text-xl"
+              className="
+                absolute
+                top-4
+                right-4
+                z-10
+                cursor-pointer
+                bg-honey
+                rounded-full
+                w-10
+                h-10
+                flex
+                items-center
+                justify-center
+                shadow-lg
+                hover:scale-105
+                transition
+              "
             >
-              <img src="../../src/assets/closex.svg"></img>
+              <img
+                src="../../src/assets/closex.svg"
+                alt="close"
+                className="w-5 h-5"
+              />
             </button>
 
-            <img
-              src={image}
-              alt={title}
-              className="w-full max-h-[85vh] object-contain rounded-2xl"
-            />
+            {/* Image Section */}
+            <div
+              className="
+                w-full
+                md:w-[48%]
+                bg-[#5d3d1d]
+                flex
+                items-center
+                justify-center
+                p-8
+                min-h-[320px]
+                md:min-h-[720px]
+              "
+            >
+              <img
+                src={image}
+                alt={title}
+                className="
+                  max-h-[90%]
+                  max-w-[90%]
+                  object-contain
+                  drop-shadow-2xl
+                  transition
+                  duration-300
+                "
+              />
+            </div>
+
+            {/* Text Section */}
+            <div
+              className="
+                w-full
+                md:w-[52%]
+                p-8
+                md:p-10
+                flex
+                flex-col
+                overflow-y-auto
+                max-h-[85vh]
+                bg-dhoney
+                text-brownt
+              "
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+            >
+              {/* Title */}
+              <h2 className="text-4xl font-bold mb-8 leading-tight">
+                {title}
+              </h2>
+
+              {/* Description */}
+              <div className="space-y-8 text-[16px] leading-8">
+                {/* Main Description */}
+                <div className="bg-white/30 rounded-2xl p-5">
+                  <h3 className="font-bold text-xl mb-4">
+                    Opis proizvoda
+                  </h3>
+
+                  <div className="space-y-3">
+                    {description.des
+                      ?.split(".")
+                      .filter((item) => item.trim() !== "")
+                      .map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex items-start gap-3"
+                        >
+                          <span className="mt-2 h-2 w-2 rounded-full bg-brownt shrink-0" />
+
+                          <p>{item.trim()}.</p>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+
+                {/* Benefits */}
+                {description.prof?.length > 0 && (
+                  <div className="bg-white/30 rounded-2xl p-5">
+                    <h3 className="font-bold text-xl mb-4">
+                      Prednosti
+                    </h3>
+
+                    <ul className="space-y-4">
+                      {description.prof.map((item, index) => (
+                        <li
+                          key={index}
+                          className="flex items-start gap-3"
+                        >
+                          <span className="mt-2 h-2.5 w-2.5 rounded-full bg-brownt shrink-0" />
+
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Technical Info */}
+                {description.tec?.length > 0 && (
+                  <div className="bg-white/30 rounded-2xl p-5">
+                    <h3 className="font-bold text-xl mb-4">
+                      Dodatne informacije
+                    </h3>
+
+                    <ul className="space-y-4">
+                      {description.tec.map((item, index) => (
+                        <li
+                          key={index}
+                          className="flex items-start gap-3"
+                        >
+                          <span className="mt-2 h-2.5 w-2.5 rounded-full bg-brownt shrink-0" />
+
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Price */}
+              <div
+                className="
+                  mt-10
+                  pt-6
+                  border-t
+                  border-brownt/20
+                  text-4xl
+                  font-bold
+                "
+              >
+                {price} RSD
+              </div>
+            </div>
           </div>
         </div>
       )}
-</div>
-</div>
     </div>
   );
 }

@@ -10,13 +10,16 @@ type GalleryItem = {
 };
 
 export default function GallerySection() {
-  const [showGallery, setShowGallery] = useState(false);
-  const [playingVideoId, setPlayingVideoId] = useState<string | number | null>(null);
+  const [playingVideoId, setPlayingVideoId] = useState<
+    string | number | null
+  >(null);
 
-  // 🔥 store BOTH image + video index
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const videoRefs = useRef<Record<string | number, HTMLVideoElement | null>>({});
+  const videoRefs = useRef<Record<string | number, HTMLVideoElement | null>>(
+    {}
+  );
+
   const items = galleryItems as GalleryItem[];
 
   const handleVideoToggle = (item: GalleryItem) => {
@@ -33,7 +36,7 @@ export default function GallerySection() {
     }
   };
 
-  // 🔥 KEYBOARD CONTROLS
+  // KEYBOARD CONTROLS
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (lightboxIndex === null) return;
@@ -56,99 +59,86 @@ export default function GallerySection() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lightboxIndex, items.length]);
-
+const itemsToShow = items.slice(0, 9);
   return (
-    <section className="w-full overflow-x-hidden bg-[#fff8ef] py-20 px-6 mb-50">
+    <section className="w-full bg-cream py-20 px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}
-        <div className="space-y-6 max-w-3xl">
-          <span className="uppercase tracking-[0.25em] text-sm font-bree text-[#a15c18] font-semibold">
+        <div className="space-y-4 max-w-3xl mb-10">
+          <span className="uppercase tracking-[0.25em] text-sm font-bree text-honey font-semibold">
             Ko smo mi?
           </span>
 
-          <h2 className="text-4xl md:text-5xl  font-bree text-[#4a2d0f] leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bree text-brown leading-tight">
             Medlem, Sladak Spoj Prirode!
           </h2>
 
-          <p className="text-lg text-[#5e4a35] font-bree leading-relaxed">
+          <p className="text-lg text-brownLight font-bree leading-relaxed">
             Godinama proizvodimo prirodni med vrhunskog kvaliteta iz netaknute prirode.
           </p>
-
-          <button
-            onClick={() => setShowGallery((p) => !p)}
-            className="bg-[#FF9505] hover:scale-105 transition-all duration-300 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg"
-          >
-            {showGallery ? "Zatvori galeriju" : "Pogledaj galeriju"}
-          </button>
         </div>
 
-        {/* GALLERY */}
-        {showGallery && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
-            {items.map((item, index) => (
-              <div
-                key={item.id}
-                className={`relative overflow-hidden rounded-3xl shadow-lg group ${
-                  index === 0 ? "sm:col-span-2 h-[320px]" : "h-[220px]"
-                }`}
-              >
+        {/* GALLERY GRID (ALWAYS VISIBLE) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-5">
+          
+          {
+          itemsToShow.map((item, index) => (
+            <div
+              key={item.id}
+              className={`relative overflow-hidden rounded-3xl shadow-lg group h-[240px]`}
+            >
+              {/* IMAGE */}
+              {item.type === "image" ? (
+                <img
+                  src={item.url}
+                  alt={item.title}
+                  onClick={() => setLightboxIndex(index)}
+                  className="w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <video
+                  ref={(el) => {
+                    videoRefs.current[item.id] = el;
+                  }}
+                  src={item.url}
+                  muted
+                  loop
+                  playsInline
+                  onClick={() => setLightboxIndex(index)}
+                  className="w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
+                />
+              )}
 
-                {/* IMAGE */}
-                {item.type === "image" ? (
-                  <img
-                    src={item.url}
-                    alt={item.title}
-                    onClick={() => setLightboxIndex(index)}
-                    className="w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
-                  />
-                ) : (
-                  <>
-                    <video
-                      ref={(el) => {
-                        videoRefs.current[item.id] = el;
-                      }}
-                      src={item.url}
-                      muted
-                      loop
-                      playsInline
-                      onClick={() => setLightboxIndex(index)}   // 🔥 FIX: video opens lightbox
-                      className="w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </>
-                )}
+              {/* OVERLAY */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
 
-                {/* OVERLAY */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
+              {/* VIDEO BUTTON */}
+              {item.type === "video" && (
+                <button
+                  onClick={() => handleVideoToggle(item)}
+                  className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full border border-white/30"
+                >
+                  {playingVideoId === item.id ? (
+                    <Pause className="text-white" size={18} />
+                  ) : (
+                    <Play className="text-white" size={18} />
+                  )}
+                </button>
+              )}
 
-                {/* VIDEO BUTTON */}
-                {item.type === "video" && (
-                  <button
-                    onClick={() => handleVideoToggle(item)}
-                    className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30"
-                  >
-                    {playingVideoId === item.id ? (
-                      <Pause className="text-white" size={18} />
-                    ) : (
-                      <Play className="text-white" size={18} />
-                    )}
-                  </button>
-                )}
-
-                {/* TITLE */}
-                <div className="absolute bottom-4 left-4 text-white">
-                  <p className="font-semibold text-lg">{item.title}</p>
-                </div>
+              {/* TITLE */}
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-base">{item.title}</p>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* LIGHTBOX (IMAGE + VIDEO SUPPORT) */}
+      {/* LIGHTBOX */}
       {lightboxIndex !== null && (
         <div className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center">
-
           {/* CLOSE */}
           <button
             className="absolute top-6 right-6 text-white text-3xl"

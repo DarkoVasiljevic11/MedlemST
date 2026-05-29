@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
 @import "tailwindcss";
-
 @theme {
-    
-  --font-bree: "Bree Serif" , serif;
-  --color-brownt:#1A1A1A;
-  --color-honey: #FFB627;
-  --color-dhoney: #FF9505;
-  --color-ghoney: #E2711D;
+  --color-cream: #FFF8EF;
+  --color-honey: #E0A106;
+  --color-brown: #4A2E14;
+  --color-brownLight: #6B4B2A;
+  --color-forest: #3E5C3A;
+
+  --font-bree: "Bree Serif", serif;
 }
+
 html{
     overflow-y: scroll;
 }

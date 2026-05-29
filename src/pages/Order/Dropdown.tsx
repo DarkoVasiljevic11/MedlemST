@@ -1,64 +1,139 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-type DropdownProps = {
-  buttonText: string;
+type NavItem = {
+  name: string;
+  path: string;
 };
 
-export default function Dropdown({ buttonText }: DropdownProps) {
+type DropdownProps = {
+  buttonText?: string;
+};
+
+const navItems: NavItem[] = [
+  {
+    name: "Sve",
+    path: "/order/all",
+  },
+  {
+    name: "Lekoviti med",
+    path: "/order/lekoviti",
+  },
+  {
+    name:"Med",
+    path:"/order/med"
+  },
+  {
+    name: "Med sa ukusom",
+    path: "/order/medsaukusom",
+  },
+];
+
+export default function Dropdown({ buttonText = "Proizvodi" }: DropdownProps) {
+  const location = useLocation();
+
   return (
-      <Menu as="div" className="relative inline-block text-left mb-40">
-      {({ open }) => (
-        <>
-          <MenuButton
-            className={`
-              inline-flex items-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold
-              transition-all duration-200
-               text-brownt hover:bg-white/20 ml-10 mt-10 bg-ghoney
+    <div className="w-full  bg-cream mb-40 ">
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center gap-3 px-6 py-4">
+        <span className="text-brown font-semibold text-sm tracking-wide uppercase mr-2">
+          {buttonText}
+        </span>
 
-              ${open ? "scale-105 bg-white/20" : "scale-100"}
-            `}
-          >
-            {buttonText}
+        {navItems.map((item) => {
+          const isActive = location.pathname === item.path;
 
-            <svg
-              className={`size-5 text-brownt bg-ghoney rounded-md transition-transform duration-200 ${
-                open ? "rotate-180" : ""
-              }`}
-              viewBox="0 0 20 20"
-              fill="currentColor"
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`
+                relative rounded-full px-5 py-2.5 text-sm font-medium
+                transition-all duration-300 ease-out
+                border border-transparent
+                hover:scale-[1.03]
+                hover:shadow-md
+                ${
+                  isActive
+                    ? "bg-honey text-brown shadow-lg"
+                    : "bg-cream text-brown hover:honey"
+                }
+              `}
             >
-              <path
-                fillRule="evenodd"
-                d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </MenuButton>
+              {item.name}
 
-          <MenuItems className="absolute mt-2 w-56 rounded-md bg-dhoney shadow-lg ml-10">
-          <div className="py-1"> 
-            <MenuItem>
-              <Link to="/order/all" className="block px-4 py-2 text-brownt hover:bg-white/10 cursor-pointer">
-                Sve
-              </Link>
-            </MenuItem>
-            </div>
-            <div className="py-1">
-            <MenuItem>
-              <Link to="/order/lekoviti" className="block px-4 py-2  text-brownt hover:bg-white/10 cursor-pointer">
-                Lekoviti med
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/order/medsaukusom" className="block px-4 py-2  text-brownt hover:bg-white/10 cursor-pointer">
-                Med sa ukusom
-              </Link>
-            </MenuItem>
-            </div>
-          </MenuItems>
-        </>
-      )}
-    </Menu>
+              {isActive && (
+                <span className="absolute inset-x-3 -bottom-1 h-[3px] rounded-full bg-brownt/80" />
+              )}
+            </Link>
+          );
+        })}
+      </div>
+
+      {/* Mobile Navigation */}
+      <div className="md:hidden px-4 py-4">
+        <Menu as="div" className="relative w-full">
+          {({ open }) => (
+            <>
+              <MenuButton
+                className={`
+                  flex w-full items-center justify-between
+                  rounded-2xl border border-white/40
+                  bg-ghoney px-4 py-3
+                  text-sm font-semibold text-brownt
+                  shadow-md backdrop-blur-sm
+                  transition-all duration-200
+                  hover:shadow-lg
+                  ${open ? "scale-[1.01]" : ""}
+                `}
+              >
+                <span>{buttonText}</span>
+
+                {open ? (
+                  <XMarkIcon className="h-5 w-5" />
+                ) : (
+                  <Bars3Icon className="h-5 w-5" />
+                )}
+              </MenuButton>
+
+              <MenuItems
+                className="
+                  absolute left-0 right-0 z-50 mt-3
+                  overflow-hidden rounded-2xl
+                  bg-dhoney/95 backdrop-blur-xl
+                  shadow-2xl ring-1 ring-black/5
+                "
+              >
+                <div className="p-2">
+                  {navItems.map((item) => {
+                    const isActive = location.pathname === item.path;
+
+                    return (
+                      <MenuItem key={item.path}>
+                        <Link
+                          to={item.path}
+                          className={`
+                            flex items-center rounded-xl px-4 py-3
+                            text-sm font-medium transition-all duration-200
+                            ${
+                              isActive
+                                ? "bg-ghoney text-brownt shadow-sm"
+                                : "text-brownt hover:bg-white/20"
+                            }
+                          `}
+                        >
+                          {item.name}
+                        </Link>
+                      </MenuItem>
+                    );
+                  })}
+                </div>
+              </MenuItems>
+            </>
+          )}
+        </Menu>
+      </div>
+    </div>
   );
 }

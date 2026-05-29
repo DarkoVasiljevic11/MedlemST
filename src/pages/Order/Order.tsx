@@ -19,6 +19,9 @@ const { category } = useParams();
 
   return (
     <>
+      <div className="flex justify-center bg-cream py-10">
+        <h1 className="text-brown font-bree">Kupite nas med jebem vas usta!</h1>
+      </div>
       <Dropdown buttonText="Kategorije" />
 
       <section className="container mx-auto px-4 py-8">
@@ -30,8 +33,16 @@ const { category } = useParams();
               image={product.image}
               category={product.category.name}
               title={product.title}
-              description={product.description}
-              price={product.price}
+              description={{
+                des: product.description.des,
+                prof: Array.isArray(product.description.prof)
+                  ? product.description.prof
+                  : [product.description.prof],
+                tec: Array.isArray(product.description.tec)
+                  ? product.description.tec
+                  : [product.description.tec],
+              }}
+              variants={product.variants}
               onAddToCart={handleCart}
             />
           ))}
