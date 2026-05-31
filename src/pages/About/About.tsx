@@ -1,9 +1,10 @@
-import kamionet from "..//..//assets/panoramak.jpg";
+import kamionet from "..//..//assets/kamionsunset.jpg";
 import GallerySection from "./Gallery";
-
+import Nav from "../../components/Nav";
 function About() {
   return (
     <>
+    <Nav />
         <section className="w-full bg-cream py-20 px-6 overflow-x-hidden">
       
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-12">

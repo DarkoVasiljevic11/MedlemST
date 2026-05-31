@@ -1,25 +1,26 @@
-export default function Hero(){
-    return(
-  
-    <div className="relative h-screen w-full overflow-hidden">
-      {/* Video Background */}
+export default function Hero() {
+  return (
+    <section className="relative h-screen w-full overflow-hidden">
+      {/* VIDEO */}
       <video
         autoPlay
         loop
         muted
-        className="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover scale-100"
+        playsInline
+        className="absolute inset-0 z-0 h-full w-full object-cover"
       >
         <source src="../src/assets/medlemst1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
-      {/* Content */}
-      <div className="relative z-10 flex h-full items-center justify-center ">
-        <h1 className="text-4xl text-brown text-center font-bree font-style:italic">
-          <span className="text-honey">Sladak</span> spoj prirode! 
+      {/* OPTIONAL DARK OVERLAY */}
+      <div className="absolute inset-0 bg-black/20 z-10" />
+
+      {/* CONTENT */}
+      <div className="relative z-20 flex h-full items-center justify-center px-4">
+        <h1 className="text-center font-bree italic text-4xl md:text-6xl text-cream drop-shadow-lg">
+          <span className="text-honey">Sladak</span> spoj prirode!
         </h1>
       </div>
-    </div>
+    </section>
   );
-
 }

@@ -2,7 +2,7 @@ import Dropdown from "./Dropdown";
 import products from "./Products";
 import ProductCard from "./CartCard";
 import { useParams } from "react-router-dom";
-
+import Nav from "../../components/Nav";
 export default function Shop() {
   const handleCart = (product:any) => {
     console.log("Added:", product);
@@ -19,6 +19,7 @@ const { category } = useParams();
 
   return (
     <>
+    <Nav />
       <div className="flex justify-center bg-cream py-10">
         <h1 className="text-brown font-bree">Kupite nas med jebem vas usta!</h1>
       </div>

@@ -4,6 +4,7 @@ import { sendOrderEmail } from "./emailService";
 import { NavLink } from "react-router-dom";
 import ErrorModal from "../../components/errorModal";
 import kamion from "..//..//assets/kamionsunset.jpg"
+import Nav from "../../components/Nav";
 function ConfirmModal({
   show,
   onConfirm,
@@ -150,6 +151,8 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   if (success) {
     return (
+      <>
+      <Nav />
       <div className="min-h-[80vh] flex items-center justify-center bg-cream px-4 py-16">
 
   <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
@@ -201,12 +204,13 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
     </div>
   </div>
 </div>
-   
+   </>
     );
     
   }
 
   return (<>
+     <Nav />
     <ErrorModal
   show={showError}
   message={errorMessage}

@@ -1,39 +1,104 @@
 import Instagram from "./Ig";
 import Youtube from "./Yt";
-export default function Footer(){
-return (
+import { NavLink } from "react-router-dom";
 
+export default function Footer() {
+  const linkClass =
+    "text-cream/80 hover:text-honey transition-colors duration-300 text-body font-bree";
 
-<footer className="bg-brown">
-    <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div className="md:flex md:justify-between">
-          <div className="mb-6 md:mb-0">
-              <a href="/" className="flex items-center">
-                  <img src="../src/assets/medleml.svg" className="h-20 me-3" alt="Medlem Logo" />
-                  <span className="text-heading text-cream self-center text-2xl font-semibold font-bree whitespace-nowrap">Medlem</span>
-              </a>
+  return (
+    <footer className="bg-brown">
+      <div className="mx-auto w-full max-w-screen-xl px-6 py-10">
+        <div className="grid gap-10 md:grid-cols-3">
+          {/* Logo + Description */}
+          <div>
+            <NavLink to="/" className="flex items-center gap-3">
+              <img
+                src="../src/assets/medleml.svg"
+                className="h-20"
+                alt="Medlem Logo"
+              />
+              <span className="font-bree text-2xl text-cream">
+                Medlem
+              </span>
+            </NavLink>
+
+            <p className="mt-4 max-w-sm text-cream/80 text-body font-bree leading-relaxed">
+              Prirodni med vrhunskog kvaliteta, pažljivo proizveden i
+              pakovan kako bi sačuvao svoj autentičan ukus i nutritivne
+              vrednosti.
+            </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-              <div>
-                  <h2 className="mb-6 text-sm font-bree  text-cream text-heading">Medlem-Sladak Spoj Prirode!</h2>
-                  <div className="text-body font-medium">
-                      <p className="mb-4 font-bree text-cream">aSDAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-                        </div>  
-              </div>
-             
+
+          {/* Useful Links */}
+          <div>
+            <h3 className="mb-4 text-heading font-bree text-cream">
+              Korisni linkovi
+            </h3>
+
+            <ul className="space-y-3">
+              <li>
+                <NavLink to="/privacy-policy" className={linkClass}>
+                  Politika privatnosti
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/cookie-policy" className={linkClass}>
+                  Politika kolačića
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/dostava-i-placanje" className={linkClass}>
+                  Dostava i plaćanje
+                </NavLink>
+              </li>
+
+              
+            </ul>
           </div>
-      </div>
-      <hr className="my-6 border-default border-honey sm:mx-auto lg:my-8" />
-      <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-body font-bree text-cream sm:text-center">© 2026 <a href="/" className="hover:underline">Medlem</a>. Sva prava zadržana.
+
+          {/* Socials */}
+          <div>
+            <h3 className="mb-4 text-heading font-bree text-cream">
+              Pratite nas
+            </h3>
+
+            <p className="mb-4 text-cream/80 text-body font-bree">
+              Budite u toku sa novostima, akcijama i zanimljivostima iz
+              sveta pčelarstva.
+            </p>
+
+            <div className="flex items-center gap-4">
+              <Instagram />
+              <Youtube />
+            </div>
+          </div>
+        </div>
+
+        <hr className="my-8 border-honey/40" />
+
+        <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row">
+          <span className="font-bree text-sm text-cream/70">
+            © 2026 Medlem. Sva prava zadržana.
           </span>
-          <div className="flex mt-4 sm:justify-center sm:mt-0">
-            <Instagram />
-            <Youtube />
-          </div>
-      </div>
-    </div>
-</footer>
 
-)
+          <div className="flex gap-6">
+            <NavLink to="/privacy-policy" className={linkClass}>
+              Privatnost
+            </NavLink>
+
+            <NavLink to="/cookie-policy" className={linkClass}>
+              Kolačići
+            </NavLink>
+
+            <NavLink to="/dostava-i-placanje" className={linkClass}>
+              Dostava
+            </NavLink>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

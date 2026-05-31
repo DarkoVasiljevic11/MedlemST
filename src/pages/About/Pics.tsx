@@ -4,18 +4,7 @@
   `${BASE_URL}/${ID}/${path}`;
 
  const galleryItems = [
-     {
-    id: 1,
-    type: "video",
-    url: getImageKitUrl("StanojevicaMed/vadjenjeram.mp4"),
-    title: "Vađenje ramova iz košnice",
-  },
-  {
-    id: 2,
-    type: "video",
-    url: getImageKitUrl("StanojevicaMed/stanojevicamed.mp4"),
-    title: "Proizvodnja Stanojevića meda",
-  },
+    
   {
     id: 3,
     type: "video",
@@ -28,20 +17,9 @@
     url: getImageKitUrl("StanojevicaMed/pcele.mp4"),
     title: "Pčele u radu na saću",
   },
-  {
-    id: 5,
-    type: "video",
-    url: getImageKitUrl("StanojevicaMed/medstanojevic.mp4"),
-    title: "Punjenje i obrada meda",
-  },
 
 
-  {
-    id: 6,
-    type: "video",
-    url: getImageKitUrl("StanojevicaMed/kosnica.mp4"),
-    title: "Rad sa košnicom",
-  },
+
   {
     id: 7,
     type: "video",
