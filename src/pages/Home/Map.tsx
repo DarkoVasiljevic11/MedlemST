@@ -6,7 +6,7 @@ export default function MapSection() {
           
           {/* LEFT SIDE */}
           <div className="flex flex-col justify-center p-8 md:p-12 lg:p-16">
-            <span className="text-honey text-sm uppercase tracking-[0.2em] font-semibold">
+            <span className="text-honey font-bree text-sm uppercase tracking-[0.2em] font-semibold">
               Kontakt
             </span>
 
@@ -28,7 +28,7 @@ export default function MapSection() {
                 </h3>
 
                 <p className="mt-1 text-cream">
-                  Gornja Trešnjica, Srbija
+                  Užički put 581, 15324 Ljubovija, R. Srbija
                 </p>
               </div>
 
@@ -38,7 +38,7 @@ export default function MapSection() {
                 </h3>
 
                 <p className="mt-1 text-cream">
-                  +381 XX XXX XXXX
+                  +381 61 600 93 48
                 </p>
               </div>
 
@@ -48,7 +48,7 @@ export default function MapSection() {
                 </h3>
 
                 <p className="mt-1 text-cream">
-                  kontakt@medlem.rs
+                  medlemst@gmail.com
                 </p>
               </div>
 
@@ -58,7 +58,7 @@ export default function MapSection() {
               href="https://www.google.com/maps?q=44.1200345,19.48342"
               target="_blank"
               rel="noreferrer"
-              className="mt-10 w-fit rounded-xl bg-honey px-6 py-3 text-brown font-semibold transition-all duration-300 hover:scale-105"
+              className="mt-10 w-fit rounded-xl bg-honey px-6 py-3 text-brown font-bree font-semibold transition-all duration-300 hover:scale-105"
             >
               Otvori u Google Mapama
             </a>

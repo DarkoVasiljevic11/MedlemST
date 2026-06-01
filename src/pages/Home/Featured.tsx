@@ -32,7 +32,7 @@ export default function FeaturedProducts() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-honey uppercase tracking-[0.2em] text-sm font-semibold">
+          <span className="text-honey font-bree uppercase tracking-[0.2em] text-sm font-semibold">
             Naši proizvodi
           </span>
 
@@ -40,7 +40,7 @@ export default function FeaturedProducts() {
             Najpopularniji proizvodi
           </h2>
 
-          <p className="mt-5 text-brown/70">
+          <p className="mt-5 text-brown font-bree">
             Izdvojili smo neke od najtraženijih proizvoda iz naše
             ponude prirodnog meda.
           </p>
@@ -66,7 +66,7 @@ export default function FeaturedProducts() {
                   {product.name}
                 </h3>
 
-                <p className="mt-3 text-brown/70">
+                <p className="mt-3 text-brown font-bree">
                   {product.description}
                 </p>
 

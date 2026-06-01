@@ -29,6 +29,9 @@ export default function DostavaPlacanje() {
             <li>
               Kupac je dužan da prilikom prijema proveri stanje pošiljke.
             </li>
+            <li>
+              Dostava je besplatna na teritoriji Ljubovije, Beograda i Novog Sada.
+            </li>
           </ul>
         </section>
 
@@ -39,8 +42,7 @@ export default function DostavaPlacanje() {
 
           <p>
             Cena dostave zavisi od težine pošiljke i kurirske službe koja vrši
-            isporuku. Konačan iznos dostave biće prikazan pre potvrde
-            porudžbine.
+            isporuku. 
           </p>
         </section>
 
@@ -52,7 +54,7 @@ export default function DostavaPlacanje() {
           <ul className="list-disc pl-6 space-y-2">
             <li>Plaćanje pouzećem prilikom preuzimanja pošiljke.</li>
             <li>Uplata na tekući račun.</li>
-            <li>Online plaćanje karticama (ukoliko je dostupno).</li>
+            
           </ul>
         </section>
 

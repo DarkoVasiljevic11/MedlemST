@@ -24,9 +24,7 @@ export default function Footer() {
             </NavLink>
 
             <p className="mt-4 max-w-sm text-cream/80 text-body font-bree leading-relaxed">
-              Prirodni med vrhunskog kvaliteta, pažljivo proizveden i
-              pakovan kako bi sačuvao svoj autentičan ukus i nutritivne
-              vrednosti.
+              Sladak spoj prirode!
             </p>
           </div>
 

@@ -39,7 +39,7 @@ export default function Nav({ transparent = false }: NavProps) {
         <div className="flex items-center sm:hidden">
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/10 transition active:scale-90"
+            className="relative inline-flex items-center justify-center rounded-md p-2 text-brown hover:bg-white/10 transition active:scale-90"
           >
             <span className="sr-only">Open main menu</span>
 
@@ -168,7 +168,7 @@ export default function Nav({ transparent = false }: NavProps) {
         <NavLink
           to="/checkout"
           onClick={() => setMobileOpen(false)}
-          className="block mt-2"
+          className="block mt-2 ml-2"
         >
           <img
             src={hasItems ? cartFull : cartEmpty}

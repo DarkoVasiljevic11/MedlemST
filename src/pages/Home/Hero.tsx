@@ -1,16 +1,12 @@
+import kamionsunset from "..//..//assets/ksunset.png";
 export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* VIDEO */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-      >
-        <source src="../src/assets/medlemst1.mp4" type="video/mp4" />
-      </video>
+      <img src={kamionsunset} className="absolute inset-0 z-0 h-full w-full object-cover">
+      
+      
+      </img>
 
       {/* OPTIONAL DARK OVERLAY */}
       <div className="absolute inset-0 bg-black/20 z-10" />
@@ -24,3 +20,12 @@ export default function Hero() {
     </section>
   );
 }
+<video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 z-0 h-full w-full object-cover"
+      >
+        <source src="../src/assets/medlemst1.mp4" type="video/mp4" />
+      </video>
