@@ -4,7 +4,7 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Shop from "./pages/Order/Order";
 import Checkout from "./pages/Order/Checkout";
-import Experiences from "./pages/Experiences";
+import Experiences from "./pages/Experiences/Experiences";
 import CookieBanner from "./components/CookieBanner";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import CookiePolicy from "./components/CookiePolicy";
