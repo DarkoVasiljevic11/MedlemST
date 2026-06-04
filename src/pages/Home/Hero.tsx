@@ -8,13 +8,13 @@ export default function Hero() {
       
       </img>
 
-      {/* OPTIONAL DARK OVERLAY */}
+      {/*  DARK OVERLAY */}
       <div className="absolute inset-0 bg-black/20 z-10" />
 
       {/* CONTENT */}
       <div className="relative z-20 flex h-full items-center justify-center px-4">
         <h1 className="text-center font-bree italic text-4xl md:text-6xl text-cream drop-shadow-lg">
-          <span className="text-honey">Sladak</span> spoj prirode!
+          Sladak spoj prirode!
         </h1>
       </div>
     </section>

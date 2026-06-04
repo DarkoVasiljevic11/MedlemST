@@ -6,6 +6,8 @@ import ExperienceFilter from "./ExperienceFilter";
 import Nav from "../../components/Nav";
 export default function Experiences() {
   const [showModal, setShowModal] = useState(false);
+  const [search, setSearch] = useState("");
+const [category, setCategory] = useState("Sve");
 
   return (
     <>
@@ -14,9 +16,13 @@ export default function Experiences() {
       <ExperienceHero onOpen={() => setShowModal(true)} />
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <ExperienceFilter />
+        <ExperienceFilter  onSearch={setSearch}
+  onCategoryChange={setCategory} />
 
-        <ExperienceGrid />
+         <ExperienceGrid
+      search={search}
+      category={category}
+    />
       </div>
 
       <SubmitExperienceModal

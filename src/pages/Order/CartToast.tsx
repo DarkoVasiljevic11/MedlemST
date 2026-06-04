@@ -32,13 +32,14 @@ export default function CartToast({
         z-[9999]
         animate-slide-in
       "
+      
     >
       <div className="bg-brown text-cream rounded-2xl shadow-2xl border border-honey px-5 py-4 min-w-[280px]">
         <div className="flex items-start gap-3">
           <div className="text-honey text-xl">✓</div>
 
           <div>
-            <h4 className="font-semibold">
+            <h4 className="font-semibold font-bree">
               Proizvod dodat u korpu
             </h4>
 

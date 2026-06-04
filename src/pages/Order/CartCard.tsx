@@ -557,7 +557,30 @@ return (
       "
     >
       {price} RSD
+      <br></br>
+      <button
+          onClick={handleAddToCart}
+          className="
+            rounded-xl
+            bg-honey
+            px-5
+            py-2.5
+            text-sm
+            font-semibold
+            font-bree
+            text-brownt
+            transition
+            hover:scale-[1.02]
+            shadow-md
+            cursor-pointer
+            mt-2
+            mb-4
+          "
+        >
+          Dodajte u korpu
+        </button>
     </div>
+     
   </div>
 </div>
         </div>

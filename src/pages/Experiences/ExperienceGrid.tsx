@@ -1,33 +1,93 @@
+import { useEffect, useState } from "react";
 import ExperienceCard from "./ExperienceCard";
 
-const reviews = [
-  {
-    id: 1,
-    name: "Milan J.",
-    product: "Bagremov Med",
-    rating: 5,
-    date: "15.05.2026",
-    text: "Odličan kvalitet i veoma brz rok isporuke.",
-  },
-  {
-    id: 2,
-    name: "Jelena P.",
-    product: "Propolis",
-    rating: 5,
-    date: "12.05.2026",
-    text: "Koristimo svakodnevno i prezadovoljni smo.",
-  },
-  {
-    id: 3,
-    name: "Marko S.",
-    product: "Livadski Med",
-    rating: 5,
-    date: "09.05.2026",
-    text: "Najprirodniji med koji sam probao.",
-  },
-];
+interface Review {
+  id: number;
+  name: string;
+  productType: string;
+  rating: number;
+  title: string;
+  content: string;
+  createdAt: string;
+}
 
-export default function ExperienceGrid() {
+interface ExperienceGridProps {
+  search: string;
+  category: string;
+}
+
+export default function ExperienceGrid({
+  search,
+  category,
+}: ExperienceGridProps) {
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        setLoading(true);
+
+        const response = await fetch(
+          `http://localhost:5000/api/experiences?search=${encodeURIComponent(
+            search
+          )}&category=${encodeURIComponent(category)}`
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Greška prilikom učitavanja iskustava."
+          );
+        }
+
+        const data = await response.json();
+
+        setReviews(data);
+      } catch (err) {
+        console.error(err);
+
+        setError(
+          "Nije moguće učitati iskustva kupaca."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, [search, category]);
+
+  if (loading) {
+    return (
+      <div className="text-center py-20">
+        <p className="text-brown text-lg font-medium">
+          Učitavanje iskustava...
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-20">
+        <p className="text-red-500">
+          {error}
+        </p>
+      </div>
+    );
+  }
+
+  if (reviews.length === 0) {
+    return (
+      <div className="text-center py-20">
+        <p className="text-brown text-lg font-bree">
+          Nema pronađenih iskustava.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div
       className="
@@ -41,7 +101,14 @@ export default function ExperienceGrid() {
       {reviews.map((review) => (
         <ExperienceCard
           key={review.id}
-          {...review}
+          id={review.id}
+          name={review.name}
+          product={review.productType}
+          rating={review.rating}
+          text={review.content}
+          date={new Date(
+            review.createdAt
+          ).toLocaleDateString("sr-RS")}
         />
       ))}
     </div>

@@ -9,6 +9,8 @@ import CookieBanner from "./components/CookieBanner";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import CookiePolicy from "./components/CookiePolicy";
 import DostavaPlacanje from "./components/Delivery";
+import AdminLogin from "./pages/Experiences/AdminLogin";
+import AdminReviews from "./pages/Experiences/AdminReviews";
 function App(){
   return(
   <>
@@ -23,6 +25,15 @@ function App(){
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/dostava-i-placanje" element={<DostavaPlacanje />} />
+        <Route
+  path="/admin/login"
+  element={<AdminLogin />}
+/>
+
+<Route
+  path="/admin/reviews"
+  element={<AdminReviews />}
+/>
       </Routes>
       < Footer />
       <CookieBanner />
