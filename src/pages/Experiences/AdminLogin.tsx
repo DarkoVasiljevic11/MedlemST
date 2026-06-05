@@ -9,7 +9,7 @@ export default function AdminLogin() {
   const navigate = useNavigate();
 
   const handleLogin = async (
-    e: React.FormEvent
+    e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
 
@@ -27,8 +27,7 @@ export default function AdminLogin() {
         {
           method: "POST",
           headers: {
-            "Content-Type":
-              "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             password,
@@ -36,20 +35,27 @@ export default function AdminLogin() {
         }
       );
 
-      const data =
-        await response.json();
+      const data = await response.json();
 
       if (!response.ok) {
         setError(
           data.message ||
+            data.error ||
             "Pogrešna lozinka."
         );
         return;
       }
 
+      // Save auth data
       localStorage.setItem(
         "token",
         data.token
+      );
+
+      // Required by your current AdminReviews page
+      localStorage.setItem(
+        "admin",
+        "true"
       );
 
       navigate("/admin/reviews");
@@ -113,9 +119,7 @@ export default function AdminLogin() {
           placeholder="Lozinka"
           value={password}
           onChange={(e) => {
-            setPassword(
-              e.target.value
-            );
+            setPassword(e.target.value);
             setError("");
           }}
           className="

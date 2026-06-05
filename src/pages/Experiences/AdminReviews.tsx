@@ -21,44 +21,83 @@ export default function AdminReviews() {
   const [rating, setRating] = useState("Sve");
 
   useEffect(() => {
-    if (localStorage.getItem("admin") !== "true") {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
       navigate("/admin/login");
       return;
     }
 
     fetchReviews();
-  }, []);
+  }, [navigate]);
 
   const fetchReviews = async () => {
     try {
       setLoading(true);
 
+      const token = localStorage.getItem("token");
+
       const response = await fetch(
-        "http://localhost:5000/api/experiences/pending"
+        "http://localhost:5000/api/experiences/pending",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (!response.ok) {
-        throw new Error("Greška pri učitavanju.");
+        const errorData = await response
+          .json()
+          .catch(() => null);
+
+        throw new Error(
+          errorData?.error ||
+            errorData?.message ||
+            "Greška pri učitavanju."
+        );
       }
 
       const data = await response.json();
 
       setReviews(data);
     } catch (error) {
-      console.error(error);
+      console.error(
+        "Fetch reviews error:",
+        error
+      );
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("admin");
+
+      navigate("/admin/login");
     } finally {
       setLoading(false);
     }
   };
 
-  const approveReview = async (id: number) => {
+  const approveReview = async (
+    id: number
+  ) => {
     try {
-      await fetch(
+      const token =
+        localStorage.getItem("token");
+
+      const response = await fetch(
         `http://localhost:5000/api/experiences/${id}/approve`,
         {
           method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
+
+      if (!response.ok) {
+        throw new Error(
+          "Greška pri odobravanju."
+        );
+      }
 
       fetchReviews();
     } catch (error) {
@@ -66,20 +105,35 @@ export default function AdminReviews() {
     }
   };
 
-  const deleteReview = async (id: number) => {
-    const confirmed = window.confirm(
-      "Da li ste sigurni da želite da obrišete ovu recenziju?"
-    );
+  const deleteReview = async (
+    id: number
+  ) => {
+    const confirmed =
+      window.confirm(
+        "Da li ste sigurni da želite da obrišete ovu recenziju?"
+      );
 
     if (!confirmed) return;
 
     try {
-      await fetch(
+      const token =
+        localStorage.getItem("token");
+
+      const response = await fetch(
         `http://localhost:5000/api/experiences/${id}`,
         {
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
+
+      if (!response.ok) {
+        throw new Error(
+          "Greška pri brisanju."
+        );
+      }
 
       fetchReviews();
     } catch (error) {
@@ -87,8 +141,8 @@ export default function AdminReviews() {
     }
   };
 
-  const filteredReviews = reviews.filter(
-    (review) => {
+  const filteredReviews =
+    reviews.filter((review) => {
       const matchesSearch =
         review.title
           .toLowerCase()
@@ -114,8 +168,7 @@ export default function AdminReviews() {
         matchesSearch &&
         matchesRating
       );
-    }
-  );
+    });
 
   if (loading) {
     return (
@@ -131,22 +184,50 @@ export default function AdminReviews() {
     <main className="min-h-screen bg-cream py-12">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
-        <div className="mb-10">
-          <h1
+        <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h1
+              className="
+                text-4xl
+                font-bold
+                text-brown
+                mb-3
+              "
+            >
+              Recenzije za odobrenje
+            </h1>
+
+            <p className="text-brown/70">
+              Pregledajte i odobrite
+              korisnička iskustva.
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              localStorage.removeItem(
+                "token"
+              );
+              localStorage.removeItem(
+                "admin"
+              );
+
+              navigate(
+                "/admin/login"
+              );
+            }}
             className="
-              text-4xl
-              font-bold
-              text-brown
-              mb-3
+              bg-red-600
+              text-white
+              px-5
+              py-2
+              rounded-xl
+              font-semibold
+              cursor-pointer
             "
           >
-            Recenzije za odobrenje
-          </h1>
-
-          <p className="text-brown/70">
-            Pregledajte i odobrite
-            korisnička iskustva.
-          </p>
+            Odjava
+          </button>
         </div>
 
         {/* Filters */}
@@ -166,7 +247,9 @@ export default function AdminReviews() {
           <input
             value={search}
             onChange={(e) =>
-              setSearch(e.target.value)
+              setSearch(
+                e.target.value
+              )
             }
             placeholder="Pretraži recenzije..."
             className="
@@ -181,7 +264,9 @@ export default function AdminReviews() {
           <select
             value={rating}
             onChange={(e) =>
-              setRating(e.target.value)
+              setRating(
+                e.target.value
+              )
             }
             className="
               border
@@ -218,7 +303,8 @@ export default function AdminReviews() {
         </div>
 
         {/* No Reviews */}
-        {filteredReviews.length === 0 && (
+        {filteredReviews.length ===
+          0 && (
           <div
             className="
               bg-white
