@@ -6,7 +6,7 @@ export default function ExperienceHero({ onOpen }: Props) {
   return (
     <section className="relative overflow-hidden py-24 px-4">
       <div className="max-w-4xl mx-auto text-center">
-        <p className="text-honey uppercase tracking-widest font-semibold mb-4">
+        <p className="text-honey uppercase tracking-widest font-bree font-semibold mb-4">
           Iskustva Kupaca
         </p>
 
@@ -14,7 +14,7 @@ export default function ExperienceHero({ onOpen }: Props) {
           Vaše mišljenje nam znači
         </h1>
 
-        <p className="max-w-2xl mx-auto text-brown/80 text-lg">
+        <p className="max-w-2xl mx-auto text-brown font-bree text-lg">
           Pročitajte iskustva naših kupaca i podelite svoje utiske o
           proizvodima.
         </p>
@@ -33,6 +33,7 @@ export default function ExperienceHero({ onOpen }: Props) {
             hover:scale-105
             transition
             cursor-pointer
+            font-bree
           "
         >
           Podelite iskustvo

@@ -96,9 +96,9 @@ const [showToast, setShowToast] = useState(false);
  
 return (
   <>
-    <div className="w-full max-w-sm overflow-hidden rounded-3xl bg-[#fff8ef] shadow-lg transition duration-300 hover:shadow-2xl">
+    <div className="w-full max-w-sm overflow-hidden rounded-3xl bg-cream shadow-lg transition duration-300 hover:shadow-2xl">
       {/* Product Image */}
-      <div className="relative h-64 bg-[#f5f1ea] flex items-center justify-center p-5 overflow-hidden">
+      <div className="relative h-64 bg-cream flex items-center justify-center p-5 overflow-hidden">
         <svg
           className="absolute inset-0 w-full h-full opacity-15"
           xmlns="http://www.w3.org/2000/svg"

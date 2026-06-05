@@ -16,13 +16,8 @@ const [category, setCategory] = useState("Sve");
       <ExperienceHero onOpen={() => setShowModal(true)} />
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <ExperienceFilter  onSearch={setSearch}
-  onCategoryChange={setCategory} />
-
-         <ExperienceGrid
-      search={search}
-      category={category}
-    />
+        <ExperienceFilter  onSearch={setSearch} onCategoryChange={setCategory} />
+        <ExperienceGrid search={search} category={category} />
       </div>
 
       <SubmitExperienceModal

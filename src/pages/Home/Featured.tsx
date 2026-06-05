@@ -53,13 +53,13 @@ export default function FeaturedProducts() {
               key={product.id}
               className="group overflow-hidden rounded-3xl bg-white shadow-md hover:shadow-xl transition-all duration-300"
             >
-              <div className="overflow-hidden">
+              <NavLink to="/order" className=" block overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
                   className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-              </div>
+              </NavLink>
 
               <div className="p-6">
                 <h3 className="font-bree text-2xl text-brown">

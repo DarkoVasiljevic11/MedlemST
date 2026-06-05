@@ -9,6 +9,7 @@ interface Review {
   title: string;
   content: string;
   createdAt: string;
+  approved: boolean;
 }
 
 export default function AdminReviews() {
@@ -19,7 +20,13 @@ export default function AdminReviews() {
 
   const [search, setSearch] = useState("");
   const [rating, setRating] = useState("Sve");
+  const [status, setStatus] =
+  useState("Sve");
 
+const [currentPage, setCurrentPage] =
+  useState(1);
+
+const reviewsPerPage = 9;
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -30,15 +37,22 @@ export default function AdminReviews() {
 
     fetchReviews();
   }, [navigate]);
-
+  useEffect(() => {
+  setCurrentPage(1);
+}, [
+  search,
+  rating,
+  status,
+]);
+  const API_URL=import.meta.env.VITE_API_URL;
   const fetchReviews = async () => {
     try {
       setLoading(true);
-
+      
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/experiences/pending",
+        `${API_URL}/api/experiences/admin/all`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +98,7 @@ export default function AdminReviews() {
         localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/experiences/${id}/approve`,
+        `${API_URL}/api/experiences/${id}/approve`,
         {
           method: "PATCH",
           headers: {
@@ -120,7 +134,7 @@ export default function AdminReviews() {
         localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/experiences/${id}`,
+        `${API_URL}/api/experiences/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -141,45 +155,64 @@ export default function AdminReviews() {
     }
   };
 
-  const filteredReviews =
-    reviews.filter((review) => {
-      const matchesSearch =
-        review.title
-          .toLowerCase()
-          .includes(
-            search.toLowerCase()
-          ) ||
-        review.content
-          .toLowerCase()
-          .includes(
-            search.toLowerCase()
-          ) ||
-        review.name
-          .toLowerCase()
-          .includes(
-            search.toLowerCase()
-          );
+ const filteredReviews =
+  reviews.filter((review) => {
+    const matchesSearch =
+      review.title
+        .toLowerCase()
+        .includes(
+          search.toLowerCase()
+        ) ||
+      review.content
+        .toLowerCase()
+        .includes(
+          search.toLowerCase()
+        ) ||
+      review.name
+        .toLowerCase()
+        .includes(
+          search.toLowerCase()
+        );
 
-      const matchesRating =
-        rating === "Sve" ||
-        review.rating === Number(rating);
+    const matchesRating =
+      rating === "Sve" ||
+      review.rating === Number(rating);
 
-      return (
-        matchesSearch &&
-        matchesRating
-      );
-    });
+    const matchesStatus =
+      status === "Sve" ||
+      (status === "Pending" &&
+        !review.approved) ||
+      (status === "Approved" &&
+        review.approved);
 
-  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cream">
-        <p className="text-brown text-xl">
-          Učitavanje...
-        </p>
-      </div>
+      matchesSearch &&
+      matchesRating &&
+      matchesStatus
     );
-  }
+  });
 
+const totalPages = Math.ceil(
+  filteredReviews.length /
+    reviewsPerPage
+);
+
+const displayedReviews =
+  filteredReviews.slice(
+    (currentPage - 1) *
+      reviewsPerPage,
+    currentPage *
+      reviewsPerPage
+  );
+  if (loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-cream">
+      <p className="text-brown text-xl">
+        Učitavanje...
+      </p>
+    </div>
+  );
+}
   return (
     <main className="min-h-screen bg-cream py-12">
       <div className="max-w-6xl mx-auto px-4">
@@ -194,12 +227,12 @@ export default function AdminReviews() {
                 mb-3
               "
             >
-              Recenzije za odobrenje
+              Upravljanje recenzijama
             </h1>
 
             <p className="text-brown/70">
-              Pregledajte i odobrite
-              korisnička iskustva.
+              Pregledajte i upravljajte
+              korisničkim  iskustvima.
             </p>
           </div>
 
@@ -300,6 +333,31 @@ export default function AdminReviews() {
               ★☆☆☆☆
             </option>
           </select>
+          <select
+  value={status}
+  onChange={(e) =>
+    setStatus(e.target.value)
+  }
+  className="
+    border
+    rounded-xl
+    p-4
+    min-w-[180px]
+    outline-none
+  "
+>
+  <option value="Sve">
+    Sve recenzije
+  </option>
+
+  <option value="Pending">
+    Na čekanju
+  </option>
+
+  <option value="Approved">
+    Odobrene
+  </option>
+</select>
         </div>
 
         {/* No Reviews */}
@@ -321,7 +379,7 @@ export default function AdminReviews() {
 
         {/* Reviews */}
         <div className="space-y-6">
-          {filteredReviews.map(
+          {displayedReviews.map(
             (review) => (
               <div
                 key={review.id}
@@ -359,6 +417,26 @@ export default function AdminReviews() {
                       }
                     </p>
                   </div>
+                  <div
+  className={`
+    inline-flex
+    mt-2
+    px-3
+    py-1
+    rounded-full
+    text-sm
+    font-semibold
+    ${
+      review.approved
+        ? "bg-green-100 text-green-700"
+        : "bg-yellow-100 text-yellow-700"
+    }
+  `}
+>
+  {review.approved
+    ? "Odobrena"
+    : "Na čekanju"}
+</div>
 
                   <div
                     className="
@@ -414,24 +492,24 @@ export default function AdminReviews() {
                   </div>
 
                   <div className="flex gap-3">
-                    <button
-                      onClick={() =>
-                        approveReview(
-                          review.id
-                        )
-                      }
-                      className="
-                        bg-green-600
-                        text-white
-                        px-5
-                        py-2
-                        rounded-xl
-                        font-semibold
-                        cursor-pointer
-                      "
-                    >
-                      Odobri
-                    </button>
+                  {!review.approved && (
+  <button
+    onClick={() =>
+      approveReview(review.id)
+    }
+    className="
+      bg-green-600
+      text-white
+      px-5
+      py-2
+      rounded-xl
+      font-semibold
+      cursor-pointer
+    "
+  >
+    Odobri
+  </button>
+)}
 
                     <button
                       onClick={() =>
@@ -457,6 +535,72 @@ export default function AdminReviews() {
             )
           )}
         </div>
+        {/* Pagination */}
+{totalPages > 1 && (
+  <div className="flex justify-center gap-2 mt-10 flex-wrap">
+    <button
+      onClick={() =>
+        setCurrentPage((p) =>
+          Math.max(1, p - 1)
+        )
+      }
+      disabled={currentPage === 1}
+      className="
+        px-4 py-2 rounded-xl border
+        bg-white
+        disabled:opacity-50
+        cursor-pointer
+      "
+    >
+      ←
+    </button>
+
+    {Array.from(
+      { length: totalPages },
+      (_, i) => (
+        <button
+          key={i}
+          onClick={() =>
+            setCurrentPage(i + 1)
+          }
+          className={`
+            px-4 py-2 rounded-xl border
+            cursor-pointer
+            ${
+              currentPage === i + 1
+                ? "bg-honey text-brown"
+                : "bg-white"
+            }
+          `}
+        >
+          {i + 1}
+        </button>
+      )
+    )}
+
+    <button
+      onClick={() =>
+        setCurrentPage((p) =>
+          Math.min(
+            totalPages,
+            p + 1
+          )
+        )
+      }
+      disabled={
+        currentPage === totalPages
+      }
+      className="
+        px-4 py-2 rounded-xl border
+        bg-white
+        disabled:opacity-50
+        cursor-pointer
+      "
+    >
+      →
+    </button>
+  </div>
+)}
       </div>
     </main>
   );

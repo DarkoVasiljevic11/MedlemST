@@ -22,7 +22,7 @@ function About() {
             Naša priča iza svake tegle
           </h2>
 
-          <p className="text-lg text-brown leading-relaxed font-bree">
+          <p className="text-lg text-brown leading-relaxed font-bree text-justify">
             Mi smo porodični pčelinjak koji veruje da priroda daje ono najbolje samo kada se prema njoj odnosi sa dubokim poštovanjem. Naš dom i baza nalaze se u Gornjoj Trešnjici, tik uz bistru reku Drinu i nadomak samog kanjona reke Trešnjice – u kraju koji je širom zemlje poznat po svojoj netaknutoj, divljoj lepoti i kristalno čistom vazduhu.
 Danas sa velikom posvećenošću brinemo o oko 150 pčelinjih društava. Za našu porodicu pčelarstvo nije samo posao ili proizvodnja – to je naš način života i tradicija koju gradimo svakim novim danom. U radu se vodimo jednom jednostavnom, ali zlatnom pčelarskom istinom: najbitnije nam je da su naše pčele zdrave, jer kad pčela ima – imaće i meda.
 
@@ -60,10 +60,10 @@ Danas sa velikom posvećenošću brinemo o oko 150 pčelinjih društava. Za naš
           
          
 
-          <p className="text-lg text-brown leading-relaxed font-bree">
+          <p className="text-lg text-brown leading-relaxed font-bree text-justify">
 
 Od naše baze u Podrinju do najlepših pašnjaka Srbije
-Da bismo našim pčelama obezbedili najkvalitetniji nektar i raznovrsnost lekovitog bilja, bavimo se nomadskim pčelarstvom. Posedujemo specijalizovani pčelarski kamion sa 80 fiksiranih košnica koji nam omogućava da pratimo cvetanje biljaka i selimo pčele na najčistije, medonosne lokacije širom zemlje. Na taj način uspevamo da u našim teglama sakupimo ono najbolje što priroda Srbije u tom trenutku nudi.
+da bismo našim pčelama obezbedili najkvalitetniji nektar i raznovrsnost lekovitog bilja, bavimo se nomadskim pčelarstvom. Posedujemo specijalizovani pčelarski kamion sa 80 fiksiranih košnica koji nam omogućava da pratimo cvetanje biljaka i selimo pčele na najčistije, medonosne lokacije širom zemlje. Na taj način uspevamo da u našim teglama sakupimo ono najbolje što priroda Srbije u tom trenutku nudi.
 
 
           </p>
@@ -97,10 +97,10 @@ Da bismo našim pčelama obezbedili najkvalitetniji nektar i raznovrsnost lekovi
         <div className="w-full lg:w-1/2 space-y-6">
           
           
-          <p className="text-lg text-brown leading-relaxed font-bree">
+          <p className="text-lg text-brown leading-relaxed font-bree text-justify">
             
 
-Čist proizvod, bez kompromisa
+Čist proizvod, bez kompromisa.
 U našoj ponudi možete pronaći vrhunski bagremov i livadski med, kao i jedinstvene, zdrave mešavine sa polenom, propolisom i liofilizovanim voćem.
 
 Naš med je potpuno prirodan i ne prolazi nikakve industrijske obrade, grejanja niti filtriranja. On zadržava sva svoja prirodna, hranljiva i lekovita svojstva, tačno onako kako su ga pčele u košnici stvorile.

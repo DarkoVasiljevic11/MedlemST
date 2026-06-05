@@ -11,10 +11,11 @@ import CookiePolicy from "./components/CookiePolicy";
 import DostavaPlacanje from "./components/Delivery";
 import AdminLogin from "./pages/Experiences/AdminLogin";
 import AdminReviews from "./pages/Experiences/AdminReviews";
+import ScrollToTop from "./components/ScrollToTop";
 function App(){
   return(
   <>
-  
+  <ScrollToTop />
   <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

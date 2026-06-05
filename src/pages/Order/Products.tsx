@@ -97,7 +97,7 @@ Napomena: Brža kristalizacija je prirodno svojstvo livadskog meda zbog visokog 
       
     },
     {
-        id:5,
+        id:4,
         image:bagrem,
         category:{
       name:"Med",
@@ -126,7 +126,7 @@ Napomena: Kristalizacija je prirodno svojstvo svakog čistog meda. `
   ]
     },
     {
-       id:7,
+       id:5,
        image:imuno,
        category:{
       name:"Lekoviti med",
@@ -156,7 +156,7 @@ Pakovanje: 480g
     
     },
     {
-       id:8,
+       id:6,
        image:jagoda,
        category:{
       name:"Med sa ukusom",
@@ -185,7 +185,7 @@ Pakovanje: 240g
   ]
     },
     {
-       id:9,
+       id:7,
        image:kopriva,
        category:{
       name:"Lekoviti med",
@@ -214,7 +214,7 @@ Pakovanje: 240g
   ]
     },
     {
-       id:10,
+       id:8,
        image:kakao,
        category:{
       name:"Med sa ukusom",
@@ -243,7 +243,7 @@ Pakovanje: 240g
   ]
     },
     {
-       id:12,
+       id:9,
        image:limun,
       category:{
       name:"Med sa ukusom",
@@ -272,7 +272,7 @@ Pakovanje: 240g
   ]
     },
     {
-      id:14,
+      id:10,
       image:bagrem,
       category:{
       name:"Lekoviti Med",
@@ -304,7 +304,7 @@ Pakovanje: 1010g
   ]
     },
     {
-      id:15,
+      id:11,
       image:malina,
       category:{
       name:"Med sa ukusom",
@@ -334,7 +334,7 @@ Pakovanje: 240g
   ]
     },
     {
-      id:16,
+      id:12,
       image:propolis,
       category:{
       name:"Lekoviti med/proizvod",

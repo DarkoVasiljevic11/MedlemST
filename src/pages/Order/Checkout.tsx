@@ -64,6 +64,7 @@ export default function Checkout() {
     address: "",
     phone: "",
     email: "",
+    napom: "",
   });
 
   const totalItems = cart.reduce(
@@ -111,7 +112,8 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
       !customer.name ||
       !customer.address ||
       !customer.phone ||
-      !customer.email
+      !customer.email ||
+      !customer.napom
     ) {
        setErrorMessage("Molimo popunite sva obavezna polja.");
     setShowError(true);
@@ -128,6 +130,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
         customer_address: customer.address,
         customer_phone: customer.phone,
         customer_email: customer.email,
+        customer_napom:customer.napom,
         message,
       });
 
@@ -138,6 +141,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
         address: "",
         phone: "",
         email: "",
+        napom: "",
       });
 
       setSuccess(true);
@@ -196,7 +200,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
       {/* BUTTON STYLE LINK (optional upgrade) */}
       <NavLink
         to="/order"
-        className="mt-6 inline-block bg-honey hover:scale-105 transition text-brownt px-6 py-3 rounded-xl font-semibold shadow-md font-bree"
+        className="mt-6 inline-block bg-honey hover:scale-105 transition text-brown px-6 py-3 rounded-xl font-semibold shadow-md font-bree"
       >
         Nastavi kupovinu
       </NavLink>
@@ -228,13 +232,13 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
       <h1 className="text-2xl text-brown font-bold font-bree mb-6 text-center">
         Potvrdite porudzbinu
       </h1>
-
+      <p className="py-4">Polja označena sa * su obavezna, molimo Vas da unesete odgovarajuće podatke.</p>
       {/* CUSTOMER FORM */}
       <div className="space-y-4 mb-8 ">
         <input
           type="text"
           name="name"
-          placeholder="Ime i Prezime"
+          placeholder="Ime i Prezime *"
           value={customer.name}
           onChange={handleChange}
           className="w-full border text-brownt rounded-lg p-3"
@@ -243,7 +247,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
         <input
           type="text"
           name="address"
-          placeholder="Adresa"
+          placeholder="Adresa *"
           value={customer.address}
           onChange={handleChange}
           className="w-full border rounded-lg p-3"
@@ -252,7 +256,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
         <input
           type="tel"
           name="phone"
-          placeholder="Kontakt telefon"
+          placeholder="Kontakt telefon *"
           value={customer.phone}
           onChange={handleChange}
           className="w-full border rounded-lg p-3"
@@ -261,8 +265,16 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
         <input
           type="email"
           name="email"
-          placeholder="Email adresa"
+          placeholder="Email adresa *"
           value={customer.email}
+          onChange={handleChange}
+          className="w-full border rounded-lg p-3"
+        />
+         <input
+          type="text"
+          name="napom"
+          placeholder="Dodatna napomena "
+          value={customer.napom}
           onChange={handleChange}
           className="w-full border rounded-lg p-3"
         />
@@ -323,6 +335,97 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
 >
   Isprazni korpu
 </button>
+<div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 md:p-10 shadow-sm text-brown">
+  <h2 className="text-3xl font-bree text-center mb-8">
+    Dostava i Plaćanje
+  </h2>
+
+  {/* Dostava */}
+  <section className="mb-8">
+    <h3 className="text-xl font-semibold mb-3 text-honey">
+      Dostava
+    </h3>
+
+    <ul className="space-y-3 list-disc pl-5 leading-7">
+      <li>
+        Porudžbine se obrađuju u najkraćem mogućem roku nakon potvrde narudžbine.
+      </li>
+
+      <li>
+        Dostava se vrši na teritoriji Republike Srbije.
+      </li>
+
+      <li>
+        Rok isporuke je obično od 1 do 5 radnih dana.
+      </li>
+
+      <li>
+        Vreme isporuke može varirati tokom praznika i perioda povećanog obima porudžbina.
+      </li>
+
+      <li>
+        Kupac je dužan da prilikom prijema proveri stanje pošiljke.
+      </li>
+
+      <li>
+        Dostava je besplatna na teritoriji Ljubovije, Beograda i Novog Sada.
+      </li>
+    </ul>
+  </section>
+
+  {/* Troškovi */}
+  <section className="mb-8">
+    <h3 className="text-xl font-semibold mb-3 text-honey">
+      Troškovi dostave
+    </h3>
+
+    <p className="leading-7 text-brown/80">
+      Cena dostave zavisi od težine pošiljke i kurirske službe koja vrši isporuku.
+    </p>
+  </section>
+
+  {/* Plaćanje */}
+  <section className="mb-8">
+    <h3 className="text-xl font-semibold mb-3 text-honey">
+      Načini plaćanja
+    </h3>
+
+    <ul className="space-y-3 list-disc pl-5 leading-7">
+      <li>
+        Plaćanje pouzećem prilikom preuzimanja pošiljke.
+      </li>
+
+      <li>
+        Uplata na tekući račun.
+      </li>
+    </ul>
+  </section>
+
+  {/* Reklamacije */}
+  <section className="mb-8">
+    <h3 className="text-xl font-semibold mb-3 text-honey">
+      Reklamacije i oštećenja
+    </h3>
+
+    <p className="leading-7 text-brown/80">
+      Ukoliko primetite oštećenje pošiljke prilikom preuzimanja,
+      preporučujemo da odmah obavestite kurirsku službu i kontaktirate nas
+      kako bismo što pre rešili problem.
+    </p>
+  </section>
+
+  {/* Kontakt */}
+  <section>
+    <h3 className="text-xl font-semibold mb-3 text-honey">
+      Kontakt
+    </h3>
+
+    <p className="leading-7 text-brown/80">
+      Za sva pitanja u vezi dostave ili plaćanja možete nas kontaktirati
+      putem telefona ili email adrese navedenih na sajtu.
+    </p>
+  </section>
+</div>
       </div>
 
       <button
