@@ -12,6 +12,7 @@ import DostavaPlacanje from "./components/Delivery";
 import AdminLogin from "./pages/Experiences/AdminLogin";
 import AdminReviews from "./pages/Experiences/AdminReviews";
 import ScrollToTop from "./components/ScrollToTop";
+import AdminProtectedRoute from "./pages/Experiences/AdminProtectedRoute";
 function App(){
   return(
   <>
@@ -30,11 +31,15 @@ function App(){
   path="/admin/login"
   element={<AdminLogin />}
 />
+<Route path="/admin" element={<AdminLogin />} />
 
-<Route
-  path="/admin/reviews"
-  element={<AdminReviews />}
-/>
+<Route element={<AdminProtectedRoute />}>
+  <Route
+    path="/admin/reviews"
+    element={<AdminReviews />}
+  />
+</Route>
+
       </Routes>
       < Footer />
       <CookieBanner />

@@ -26,6 +26,7 @@ export default function AdminLogin() {
         `${API_URL}/api/admin/login`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -46,17 +47,7 @@ export default function AdminLogin() {
         return;
       }
 
-      // Save auth data
-      localStorage.setItem(
-        "token",
-        data.token
-      );
-
-      // Required by your current AdminReviews page
-      localStorage.setItem(
-        "admin",
-        "true"
-      );
+    
 
       navigate("/admin/reviews");
     } catch (error) {

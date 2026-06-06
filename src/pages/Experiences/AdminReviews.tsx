@@ -28,15 +28,8 @@ const [currentPage, setCurrentPage] =
 
 const reviewsPerPage = 9;
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      navigate("/admin/login");
-      return;
-    }
-
-    fetchReviews();
-  }, [navigate]);
+  fetchReviews();
+}, []);
   useEffect(() => {
   setCurrentPage(1);
 }, [
@@ -49,14 +42,12 @@ const reviewsPerPage = 9;
     try {
       setLoading(true);
       
-      const token = localStorage.getItem("token");
+      
 
       const response = await fetch(
         `${API_URL}/api/experiences/admin/all`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+         credentials:"include",
         }
       );
 
@@ -81,8 +72,7 @@ const reviewsPerPage = 9;
         error
       );
 
-      localStorage.removeItem("token");
-      localStorage.removeItem("admin");
+     
 
       navigate("/admin/login");
     } finally {
@@ -94,16 +84,13 @@ const reviewsPerPage = 9;
     id: number
   ) => {
     try {
-      const token =
-        localStorage.getItem("token");
+      
 
       const response = await fetch(
         `${API_URL}/api/experiences/${id}/approve`,
         {
           method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+         credentials:"include",
         }
       );
 
@@ -130,16 +117,13 @@ const reviewsPerPage = 9;
     if (!confirmed) return;
 
     try {
-      const token =
-        localStorage.getItem("token");
+      
 
       const response = await fetch(
         `${API_URL}/api/experiences/${id}`,
         {
           method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          credentials:"include",
         }
       );
 
@@ -239,18 +223,19 @@ const displayedReviews =
           </div>
 
           <button
-            onClick={() => {
-              localStorage.removeItem(
-                "token"
-              );
-              localStorage.removeItem(
-                "admin"
-              );
-
-              navigate(
-                "/admin/login"
-              );
-            }}
+           onClick={async () => {
+  try {
+    await fetch(
+      `${API_URL}/api/admin/logout`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
+  } finally {
+    navigate("/admin/login");
+  }
+}}
             className="
               bg-red-600
               text-white
