@@ -53,6 +53,7 @@ function ConfirmModal({
   );
 }
 export default function Checkout() {
+  const MAX_NOTE_LENGTH = 300;
   const { cart, clearCart,removeFromCart } = useCart();
 
   const [loading, setLoading] = useState(false);
@@ -99,6 +100,7 @@ Količina: ${item.quantity}
 Veličina/tip: ${item.size}
 Cena po proizvodu: ${formatPrice(item.price)}
 Ukupno: ${formatPrice(totalPrice)}
+
 ----------------------`
       )
       .join("\n");
@@ -106,19 +108,66 @@ Ukupno: ${formatPrice(totalPrice)}
 const [showError, setShowError] = useState(false);
 const [errorMessage, setErrorMessage] = useState("");
 const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const isValidPhone = (phone: string) => {
+    const cleaned = phone.replace(/[^\d+]/g, "");
+    return /^(\+381|0)[0-9]{8,10}$/.test(cleaned);
+  };
+
+  const isValidName = (name: string) => {
+    return /^[A-Za-zČĆŽŠĐčćžšđ\s]{2,50}$/.test(name.trim());
+  };
+
+  const isValidAddress = (address: string) => {
+    return address.trim().length >= 5;
+  };
   const handleConfirm = async () => {
     // simple validation
     if (
       !customer.name ||
       !customer.address ||
       !customer.phone ||
-      !customer.email ||
-      !customer.napom
+      !customer.email 
+      
     ) {
        setErrorMessage("Molimo popunite sva obavezna polja.");
     setShowError(true);
       return;
-    }
+    } 
+
+  if (!isValidName(customer.name)) {
+    setErrorMessage("Unesite ispravno ime i prezime.");
+    setShowError(true);
+    return;
+  }
+
+  if (!isValidEmail(customer.email)) {
+    setErrorMessage("Unesite ispravnu email adresu.");
+    setShowError(true);
+    return;
+  }
+
+  if (!isValidPhone(customer.phone)) {
+    setErrorMessage("Unesite ispravan broj telefona.");
+    setShowError(true);
+    return;
+  }
+
+  if (!isValidAddress(customer.address)) {
+    setErrorMessage("Unesite ispravnu adresu.");
+    setShowError(true);
+    return;
+  }
+  if (customer.napom.length > MAX_NOTE_LENGTH) {
+  setErrorMessage(
+    `Napomena ne može sadržati više od ${MAX_NOTE_LENGTH} karaktera.`
+  );
+  setShowError(true);
+  return;
+}
 
     setLoading(true);
 
@@ -270,14 +319,26 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
           onChange={handleChange}
           className="w-full border rounded-lg p-3"
         />
-         <input
-          type="text"
-          name="napom"
-          placeholder="Dodatna napomena "
-          value={customer.napom}
-          onChange={handleChange}
-          className="w-full border rounded-lg p-3"
-        />
+        <div>
+       <textarea
+  name="napom"
+  placeholder="Dodatna napomena (opciono)"
+   value={customer.napom}
+  onChange={(e) => {
+    const value = e.target.value.slice(0, MAX_NOTE_LENGTH);
+
+    setCustomer({
+      ...customer,
+      napom: value,
+    });
+  }}
+  rows={4}
+  className="w-full border rounded-lg p-3 resize-none"
+/>
+<div className="mt-1 text-right text-sm text-gray-500">
+  Preostalo: {MAX_NOTE_LENGTH - customer.napom.length}
+</div>
+</div>
       </div>
 
       {/* ORDER SUMMARY */}
@@ -335,11 +396,21 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
 >
   Isprazni korpu
 </button>
+ <button
+        onClick={handleConfirm}
+        disabled={loading || cart.length === 0}
+        className="cursor-pointer mt-6 w-full bg-honey text-brown font-bree px-6 py-3 rounded-lg disabled:opacity-60 mt-4"
+      >
+        {loading ? "Obradjivanje..." : "Potvrdi porudzbinu"}
+      </button>
+    </div>
 <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 md:p-10 shadow-sm text-brown">
   <h2 className="text-3xl font-bree text-center mb-8">
     Dostava i Plaćanje
   </h2>
+</div>
 
+     
   {/* Dostava */}
   <section className="mb-8">
     <h3 className="text-xl font-semibold mb-3 text-honey">
@@ -347,42 +418,16 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
     </h3>
 
     <ul className="space-y-3 list-disc pl-5 leading-7">
-      <li>
-        Porudžbine se obrađuju u najkraćem mogućem roku nakon potvrde narudžbine.
-      </li>
-
+     
       <li>
         Dostava se vrši na teritoriji Republike Srbije.
       </li>
-
-      <li>
-        Rok isporuke je obično od 1 do 5 radnih dana.
-      </li>
-
-      <li>
-        Vreme isporuke može varirati tokom praznika i perioda povećanog obima porudžbina.
-      </li>
-
-      <li>
-        Kupac je dužan da prilikom prijema proveri stanje pošiljke.
-      </li>
-
       <li>
         Dostava je besplatna na teritoriji Ljubovije, Beograda i Novog Sada.
       </li>
     </ul>
   </section>
 
-  {/* Troškovi */}
-  <section className="mb-8">
-    <h3 className="text-xl font-semibold mb-3 text-honey">
-      Troškovi dostave
-    </h3>
-
-    <p className="leading-7 text-brown/80">
-      Cena dostave zavisi od težine pošiljke i kurirske službe koja vrši isporuku.
-    </p>
-  </section>
 
   {/* Plaćanje */}
   <section className="mb-8">
@@ -401,41 +446,20 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
     </ul>
   </section>
 
-  {/* Reklamacije */}
-  <section className="mb-8">
-    <h3 className="text-xl font-semibold mb-3 text-honey">
-      Reklamacije i oštećenja
-    </h3>
-
-    <p className="leading-7 text-brown/80">
-      Ukoliko primetite oštećenje pošiljke prilikom preuzimanja,
-      preporučujemo da odmah obavestite kurirsku službu i kontaktirate nas
-      kako bismo što pre rešili problem.
-    </p>
-  </section>
-
   {/* Kontakt */}
   <section>
     <h3 className="text-xl font-semibold mb-3 text-honey">
       Kontakt
     </h3>
 
-    <p className="leading-7 text-brown/80">
+    <p className="leading-7 text-brown">
       Za sva pitanja u vezi dostave ili plaćanja možete nas kontaktirati
       putem telefona ili email adrese navedenih na sajtu.
     </p>
   </section>
-</div>
-      </div>
 
-      <button
-        onClick={handleConfirm}
-        disabled={loading || cart.length === 0}
-        className="cursor-pointer mt-6 w-full bg-honey text-brown font-bree px-6 py-3 rounded-lg disabled:opacity-60 mt-4"
-      >
-        {loading ? "Obradjivanje..." : "Potvrdi porudzbinu"}
-      </button>
-    </div>
+</div>
+     
     </>
   );
 }

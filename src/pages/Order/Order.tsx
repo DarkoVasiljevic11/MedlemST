@@ -47,13 +47,19 @@ export default function Shop() {
   return (
     <>
       <Nav />
-
-      <div className="flex justify-center bg-cream py-10">
-        <h1 className="text-brown font-bree">
-          Kupite nas med jebem vas usta!
-        </h1>
-      </div>
-
+    
+      <div className="bg-cream py-12 px-4">
+  <div className="max-w-4xl mx-auto">
+    <h1 className="text-brown font-bree text-center text-lg sm:text-xl md:text-2xl leading-relaxed">
+      Izaberite neki od proizvoda iz naše ponude. Naša ponuda se neprestano
+      proširuje. Ukoliko imate ideju za proizvod koji biste voleli da probate,
+      kontaktirajte nas i rado ćemo saslušati vaš predlog.
+    </h1>
+  </div>
+</div>
+ <div className="w-full flex justify-center my-5">
+  <div className="w-2 h-2 bg-honey rounded-full opacity-60" />
+</div>
       <Dropdown buttonText="Kategorije" />
 
       <section className="container mx-auto px-4 py-8">

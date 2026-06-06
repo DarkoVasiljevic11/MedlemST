@@ -5,6 +5,7 @@ interface OrderEmailParams extends Record<string, unknown> {
   customer_address: string;
   customer_phone: string;
   customer_email: string;
+  customer_napom: string;
   message: string;
 }
 

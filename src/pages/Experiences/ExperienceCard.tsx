@@ -3,31 +3,40 @@ interface ExperienceCardProps {
   name: string;
   product: string;
   rating: number;
+  title: string;
   text: string;
   date: string;
+  onOpen: () => void;
 }
 
 export default function ExperienceCard({
   name,
   product,
   rating,
+  title,
   text,
   date,
+  onOpen,
 }: ExperienceCardProps) {
   return (
     <article
+      onClick={onOpen}
       className="
         bg-[#FFF8EF]
         rounded-3xl
-        p-6
+        p-5
+        md:p-6
         shadow-md
         hover:shadow-xl
         hover:-translate-y-1
         transition-all
         duration-300
         h-full
+        min-h-[340px]
+        md:min-h-[360px]
         flex
         flex-col
+        cursor-pointer
       "
     >
       {/* Rating */}
@@ -35,7 +44,8 @@ export default function ExperienceCard({
         className="
           mb-4
           text-honey
-          text-2xl
+          text-xl
+          md:text-2xl
           flex
           gap-1
         "
@@ -47,17 +57,48 @@ export default function ExperienceCard({
         ))}
       </div>
 
-      {/* Review Text */}
+      {/* Title */}
+      <h3
+        className="
+          text-brown
+          font-bold
+          text-lg
+          md:text-xl
+          mb-3
+          line-clamp-2
+          break-words
+        "
+      >
+        {title}
+      </h3>
+
+      {/* Review Preview */}
       <p
         className="
           text-brown
-          leading-7
-          flex-grow
-          mb-6
+          text-sm
+          md:text-base
+          leading-relaxed
           italic
+          flex-grow
+          mb-5
+          break-words
+          line-clamp-5
         "
       >
         "{text}"
+      </p>
+
+      <p
+        className="
+          text-xs
+          md:text-sm
+          text-honey
+          font-medium
+          mb-4
+        "
+      >
+        Kliknite za ceo utisak →
       </p>
 
       {/* Footer */}
@@ -71,7 +112,6 @@ export default function ExperienceCard({
           gap-4
         "
       >
-        {/* Avatar */}
         <div
           className="
             w-12
@@ -90,8 +130,7 @@ export default function ExperienceCard({
           {name.charAt(0).toUpperCase()}
         </div>
 
-        {/* User Info */}
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <p
             className="
               font-bold
@@ -102,21 +141,30 @@ export default function ExperienceCard({
             {name}
           </p>
 
-          <p
-            className="
-              text-sm
-              text-honey
-              truncate
-            "
-          >
-            {product}
-          </p>
+          <div className="mt-1">
+            <span
+              className="
+                inline-flex
+                items-center
+                px-2.5
+                py-1
+                rounded-full
+                bg-honey/10
+                text-honey
+                text-xs
+                md:text-sm
+                font-medium
+              "
+            >
+              {product}
+            </span>
+          </div>
 
           <p
             className="
               text-xs
-              text-brown/50
-              mt-1
+              text-brown/60
+              mt-2
             "
           >
             {date}

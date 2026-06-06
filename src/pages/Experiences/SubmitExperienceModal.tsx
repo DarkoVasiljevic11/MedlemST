@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ErrorModal from "../../components/errorModal";
 
 interface Props {
   open: boolean;
@@ -24,19 +25,78 @@ export default function SubmitExperienceModal({
 
   const [success, setSuccess] =
     useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+const [showError, setShowError] = useState(false);
+const MAX_NAME_LENGTH = 50;
+const MAX_TITLE_LENGTH = 50;
+const MAX_CONTENT_LENGTH = 250;
 
   if (!open) return null;
-
+  const API_URL=import.meta.env.VITE_API_URL;
   const handleSubmit = async (
-    e: React.SubmitEvent<HTMLFormElement>
+    
+    e: React.FormEvent<HTMLFormElement>
   ) => {
+    
     e.preventDefault();
+     // Honeypot spam protection
+if (website.trim() !== "") {
+  console.log("FAILED WEBSITE");
+  return;
+}
 
+// Name validation
+if (!/^[A-Za-zČĆŽŠĐčćžšđ\s]{2,50}$/.test(name.trim())) {
+  setErrorMessage(
+    "Ime može sadržati samo slova i mora imati između 2 i 50 karaktera."
+  );
+  setShowError(true);
+  
+  return;
+}
+
+// Title validation
+if (title.trim().length < 5) {
+  setErrorMessage(
+    "Naslov iskustva mora sadržati najmanje 5 karaktera."
+  );
+  setShowError(true);
+  
+  return;
+}
+
+if (title.trim().length > MAX_TITLE_LENGTH) {
+  setErrorMessage(
+    `Naslov iskustva ne može biti duži od ${MAX_TITLE_LENGTH} karaktera.`
+  );
+  setShowError(true);
+  
+  return;
+}
+
+// Content validation
+if (content.trim().length < 20) {
+  setErrorMessage(
+    "Iskustvo mora sadržati najmanje 20 karaktera."
+  );
+  setShowError(true);
+  
+  return;
+}
+
+if (content.trim().length > MAX_CONTENT_LENGTH) {
+  setErrorMessage(
+    `Iskustvo ne može biti duže od ${MAX_CONTENT_LENGTH} karaktera.`
+  );
+  setShowError(true);
+  
+  return;
+}
     try {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/experiences",
+        `${API_URL}/api/experiences`,
         {
           method: "POST",
           headers: {
@@ -84,6 +144,12 @@ export default function SubmitExperienceModal({
   
 
   return (
+    <>
+   <ErrorModal
+  show={showError}
+  message={errorMessage}
+  onClose={() => setShowError(false)}
+/>
     <div
       onClick={onClose}
       className="
@@ -131,9 +197,15 @@ export default function SubmitExperienceModal({
         >
           <input
             value={name}
-            onChange={(e) =>
-              setName(e.target.value)
-            }
+            maxLength={MAX_NAME_LENGTH}
+  onChange={(e) =>
+    setName(
+      e.target.value.slice(
+        0,
+        MAX_NAME_LENGTH
+      )
+    )
+  }
             placeholder="Ime"
             required
             className="
@@ -147,7 +219,15 @@ export default function SubmitExperienceModal({
               focus:ring-honey
             "
           />
-
+         <div
+  className={`text-right text-sm ${
+    name.length > MAX_NAME_LENGTH * 0.9
+      ? "text-red-500"
+      : "text-gray-500"
+  }`}
+>
+  {name.length}/{MAX_NAME_LENGTH}
+</div>   
           <select
             value={productType}
             onChange={(e) =>
@@ -157,13 +237,20 @@ export default function SubmitExperienceModal({
             }
             className="
               w-full
-              p-4
-              rounded-xl
-              border
-              border-gray-300
-              focus:outline-none
-              focus:ring-2
-              focus:ring-honey
+    p-4
+    rounded-xl
+    bg-white
+    text-brown
+    border
+    border-honey/40
+    shadow-sm
+    cursor-pointer
+    transition
+    focus:outline-none
+    focus:ring-2
+    focus:ring-honey
+    focus:border-honey
+    hover:border-honey
             "
           >
             <option>Bagremov Med</option>
@@ -188,7 +275,7 @@ export default function SubmitExperienceModal({
   }
   className="hidden"
 />
-         
+       
           {/* Rating */}
 <div
   className="
@@ -294,9 +381,15 @@ export default function SubmitExperienceModal({
 
           <input
             value={title}
-            onChange={(e) =>
-              setTitle(e.target.value)
-            }
+            maxLength={MAX_TITLE_LENGTH}
+  onChange={(e) =>
+    setTitle(
+      e.target.value.slice(
+        0,
+        MAX_TITLE_LENGTH
+      )
+    )
+  }
             placeholder="Naslov iskustva"
             required
             className="
@@ -310,15 +403,28 @@ export default function SubmitExperienceModal({
               focus:ring-honey
             "
           />
+       <div
+  className={`text-right text-sm ${
+    title.length > MAX_TITLE_LENGTH * 0.9
+      ? "text-red-500"
+      : "text-gray-500"
+  }`}
+>
+  {title.length}/{MAX_TITLE_LENGTH}
+</div>
 
           <textarea
             rows={6}
             value={content}
-            onChange={(e) =>
-              setContent(
-                e.target.value
-              )
-            }
+             maxLength={MAX_CONTENT_LENGTH}
+  onChange={(e) =>
+    setContent(
+      e.target.value.slice(
+        0,
+        MAX_CONTENT_LENGTH
+      )
+    )
+  }
             placeholder="Vaše iskustvo..."
             required
             className="
@@ -333,6 +439,15 @@ export default function SubmitExperienceModal({
               focus:ring-honey
             "
           />
+   <div
+  className={`text-right text-sm ${
+    content.length > MAX_CONTENT_LENGTH * 0.9
+      ? "text-red-500"
+      : "text-gray-500"
+  }`}
+>
+  {content.length}/{MAX_CONTENT_LENGTH}
+</div>
 
           {success && (
             <div
@@ -374,5 +489,6 @@ export default function SubmitExperienceModal({
         </form>
       </div>
     </div>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Nav from "../../components/Nav";
 export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,7 +12,7 @@ export default function AdminLogin() {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-
+   const API_URL=import.meta.env.VITE_API_URL;
     if (!password.trim()) {
       setError("Unesite lozinku.");
       return;
@@ -23,7 +23,7 @@ export default function AdminLogin() {
       setError("");
 
       const response = await fetch(
-        "http://localhost:5000/api/admin/login",
+        `${API_URL}/api/admin/login`,
         {
           method: "POST",
           headers: {
@@ -71,6 +71,8 @@ export default function AdminLogin() {
   };
 
   return (
+    <>
+    <Nav />
     <main
       className="
         min-h-screen
@@ -173,5 +175,6 @@ export default function AdminLogin() {
         </button>
       </form>
     </main>
+    </>
   );
 }

@@ -86,7 +86,7 @@ export default function FeaturedProducts() {
         <div className="mt-16 text-center">
           <NavLink
             to="/order"
-            className="inline-flex items-center gap-2 rounded-xl bg-honey px-8 py-4 font-semibold text-brown transition hover:scale-105"
+            className="inline-flex items-center gap-2 rounded-xl bg-honey px-8 py-4 font-semibold text-brown font-bree transition hover:scale-105"
           >
             Pogledaj sve proizvode →
           </NavLink>

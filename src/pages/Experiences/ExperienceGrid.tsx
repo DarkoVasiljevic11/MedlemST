@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ExperienceCard from "./ExperienceCard";
+import ExperienceModal from "./ExperienceModal";
 
 interface Review {
   id: number;
@@ -28,6 +29,8 @@ export default function ExperienceGrid({
     useState(1);
 
   const reviewsPerPage = 9;
+  const [selectedExperience, setSelectedExperience] =
+  useState<Review | null>(null);
   const API_URL=import.meta.env.VITE_API_URL;
   useEffect(() => {
     const fetchReviews = async () => {
@@ -118,27 +121,47 @@ export default function ExperienceGrid({
           gap-8
         "
       >
+        
         {displayedReviews.map(
           (review) => (
-            <ExperienceCard
-              key={review.id}
-              id={review.id}
-              name={review.name}
-              product={
-                review.productType
-              }
-              rating={review.rating}
-              text={review.content}
-              date={new Date(
-                review.createdAt
-              ).toLocaleDateString(
-                "sr-RS"
-              )}
-            />
+        <ExperienceCard
+  key={review.id}
+  id={review.id}
+  name={review.name}
+  product={review.productType}
+  rating={review.rating}
+  title={review.title}
+  text={review.content}
+  date={new Date(
+    review.createdAt
+  ).toLocaleDateString("sr-RS")}
+  onOpen={() => setSelectedExperience(review)}
+/>
           )
         )}
+   
       </div>
-
+     <ExperienceModal
+  open={!!selectedExperience}
+  experience={
+    selectedExperience
+      ? {
+          name: selectedExperience.name,
+          product:
+            selectedExperience.productType,
+          rating: selectedExperience.rating,
+          title: selectedExperience.title,
+          text: selectedExperience.content,
+          date: new Date(
+            selectedExperience.createdAt
+          ).toLocaleDateString("sr-RS"),
+        }
+      : null
+  }
+  onClose={() =>
+    setSelectedExperience(null)
+  }
+/>
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2 mt-12 flex-wrap">
           <button

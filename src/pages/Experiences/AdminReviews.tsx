@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Nav from "../../components/Nav";
 interface Review {
   id: number;
   name: string;
@@ -214,6 +214,8 @@ const displayedReviews =
   );
 }
   return (
+    <>
+    <Nav />
     <main className="min-h-screen bg-cream py-12">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
@@ -388,6 +390,12 @@ const displayedReviews =
                   rounded-3xl
                   p-6
                   shadow-md
+                  text-1xl
+                  md:text-2xl
+                  font-bold
+                  text-brown
+                  break-all
+                  max-w-full
                 "
               >
                 <div
@@ -398,14 +406,18 @@ const displayedReviews =
                     md:justify-between
                     gap-4
                     mb-4
+                      
                   "
                 >
                   <div>
                     <h2
                       className="
-                        text-2xl
+                        text-1xl
+                         md:text-2xl
                         font-bold
                         text-brown
+                        break-all
+                        max-w-full
                       "
                     >
                       {review.title}
@@ -603,5 +615,6 @@ const displayedReviews =
 )}
       </div>
     </main>
+    </>
   );
 }
