@@ -63,6 +63,7 @@ export default function Checkout() {
   const [customer, setCustomer] = useState({
     name: "",
     address: "",
+    city:"",
     phone: "",
     email: "",
     napom: "",
@@ -124,11 +125,15 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
   const isValidAddress = (address: string) => {
     return address.trim().length >= 5;
   };
+  const isValidCity = (city: string) => {
+    return city.trim().length >= 2;
+  };
   const handleConfirm = async () => {
     // simple validation
     if (
       !customer.name ||
       !customer.address ||
+      !customer.city ||
       !customer.phone ||
       !customer.email 
       
@@ -161,6 +166,11 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
     setShowError(true);
     return;
   }
+   if (!isValidCity(customer.city)) {
+    setErrorMessage("Unesite grad.");
+    setShowError(true);
+    return;
+  }
   if (customer.napom.length > MAX_NOTE_LENGTH) {
   setErrorMessage(
     `Napomena ne može sadržati više od ${MAX_NOTE_LENGTH} karaktera.`
@@ -177,6 +187,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
       await sendOrderEmail({
         customer_name: customer.name,
         customer_address: customer.address,
+        customer_city: customer.city,
         customer_phone: customer.phone,
         customer_email: customer.email,
         customer_napom:customer.napom,
@@ -188,6 +199,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
       setCustomer({
         name: "",
         address: "",
+        city:"",
         phone: "",
         email: "",
         napom: "",
@@ -301,6 +313,15 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
           onChange={handleChange}
           className="w-full border rounded-lg p-3"
         />
+         <input
+          type="text"
+          name="city"
+          placeholder="Grad *"
+          value={customer.city}
+          onChange={handleChange}
+          className="w-full border rounded-lg p-3"
+        />
+
 
         <input
           type="tel"

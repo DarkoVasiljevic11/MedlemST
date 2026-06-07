@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import Dropdown from "./Dropdown";
 import products from "./Products";
 import ProductCard from "./CartCard";
 import Nav from "../../components/Nav";
-
+import pcela from "..//../assets/pcela.jpg";
 export default function Shop() {
   const handleCart = (product: any) => {
     console.log("Added:", product);
@@ -48,15 +47,31 @@ export default function Shop() {
     <>
       <Nav />
     
-      <div className="bg-cream py-12 px-4">
-  <div className="max-w-4xl mx-auto">
-    <h1 className="text-brown font-bree text-center text-lg sm:text-xl md:text-2xl leading-relaxed">
-      Izaberite neki od proizvoda iz naše ponude. Naša ponuda se neprestano
-      proširuje. Ukoliko imate ideju za proizvod koji biste voleli da probate,
-      kontaktirajte nas i rado ćemo saslušati vaš predlog.
-    </h1>
-  </div>
-</div>
+     <section className="w-full bg-cream py-20 px-6 overflow-x-hidden">
+      
+      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-12">
+
+        {/* LEFT TEXT */}
+        <div className="w-full lg:w-1/2 space-y-6">
+          <p className="text-lg text-brown leading-relaxed font-bree text-justify">
+            Izaberite neki od proizvoda iz naše ponude. Ukoliko imate ideju za proizvod koji biste voleli da probate, kontaktirajte nas i rado ćemo saslušati vaš predlog.
+          </p>
+        </div>
+        {/* RIGHT IMAGE */}
+        <div className="w-full lg:w-1/2">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
+            
+            <img
+              src={pcela}
+              alt="Pčelarstvo"
+              className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+          </div>
+        </div>
+
+      </div>
+    </section>
  <div className="w-full flex justify-center my-5">
   <div className="w-2 h-2 bg-honey rounded-full opacity-60" />
 </div>

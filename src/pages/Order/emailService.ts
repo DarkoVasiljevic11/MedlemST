@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser";
 interface OrderEmailParams extends Record<string, unknown> {
   customer_name: string;
   customer_address: string;
+  customer_city: string;
   customer_phone: string;
   customer_email: string;
   customer_napom: string;
