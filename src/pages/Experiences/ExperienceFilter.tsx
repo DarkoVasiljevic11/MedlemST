@@ -102,6 +102,7 @@ export default function ExperienceFilters({
               whitespace-nowrap
               cursor-pointer
               transition
+              font-bree
               ${
                 activeCategory === category
                   ? "bg-honey text-brown shadow-md"

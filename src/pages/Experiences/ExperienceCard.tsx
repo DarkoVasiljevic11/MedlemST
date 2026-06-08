@@ -67,6 +67,7 @@ export default function ExperienceCard({
           mb-3
           line-clamp-2
           break-words
+          font-bree
         "
       >
         {title}
@@ -84,6 +85,7 @@ export default function ExperienceCard({
           mb-5
           break-words
           line-clamp-5
+          font-bree
         "
       >
         "{text}"
@@ -96,6 +98,7 @@ export default function ExperienceCard({
           text-honey
           font-medium
           mb-4
+          font-bree
         "
       >
         Kliknite za ceo utisak →
@@ -136,6 +139,7 @@ export default function ExperienceCard({
               font-bold
               text-brown
               truncate
+              font-bree
             "
           >
             {name}
