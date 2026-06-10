@@ -1,5 +1,6 @@
 import Instagram from "./Ig";
 import Youtube from "./Yt";
+import Facebook from "./Fb";
 import { NavLink } from "react-router-dom";
 
 export default function Footer() {
@@ -71,6 +72,7 @@ export default function Footer() {
             <div className="flex items-center gap-4">
               <Instagram />
               <Youtube />
+              <Facebook />
             </div>
           </div>
         </div>

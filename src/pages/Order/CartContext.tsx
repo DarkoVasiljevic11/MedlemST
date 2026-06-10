@@ -18,7 +18,7 @@ export function CartProvider({ children }: any) {
     const normalizedItem = {
       ...newItem,
 
-      // 🔥 ensure image always exists under ONE key
+      //  ensure image always exists under ONE key
       image: newItem.image || newItem.imageUrl || newItem.img || "",
 
       // safety fallback for price/size
