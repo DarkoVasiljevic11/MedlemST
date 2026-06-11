@@ -1,0 +1,23 @@
+/* TEAM */
+
+Developer: Darko Vasiljevic
+Site: Medlem
+Location: Serbia
+
+/* SITE */
+
+Frontend:
+React
+Vite
+Tailwind CSS
+
+Backend:
+Express.js
+PostgreSQL
+
+Launch:
+2026
+
+/* THANKS */
+
+StanojevicaaMeeedd

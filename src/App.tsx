@@ -13,19 +13,35 @@ import AdminLogin from "./pages/Experiences/AdminLogin";
 import AdminReviews from "./pages/Experiences/AdminReviews";
 import ScrollToTop from "./components/ScrollToTop";
 import AdminProtectedRoute from "./pages/Experiences/AdminProtectedRoute";
+import { useEffect } from "react";
+import {
+  initializeAnalytics,
+} from "./analytics";
+import {AnalyticsTracker} from "./AnalyticsTracker";
 function App(){
+    useEffect(() => {
+    const consent =
+      localStorage.getItem(
+        "cookieConsent"
+      );
+
+    if (consent === "accepted") {
+      initializeAnalytics();
+    }
+  }, []);
   return(
   <>
+  <AnalyticsTracker />
   <ScrollToTop />
   <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/exp" element={<Experiences />} />
-        <Route path="/checkout" element={<Checkout/>} />
-        <Route path="/order" element={<Shop />} />
-        <Route path="/order/:category" element={<Shop />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/cookie-policy" element={<CookiePolicy />} />
+        <Route path="/onama" element={<About />} />
+        <Route path="/iskustva" element={<Experiences />} />
+        <Route path="/poručeno" element={<Checkout/>} />
+        <Route path="/poručite" element={<Shop />} />
+        <Route path="/poručite/:category" element={<Shop />} />
+        <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
+        <Route path="/politika-kolačića" element={<CookiePolicy />} />
         <Route path="/dostava-i-placanje" element={<DostavaPlacanje />} />
         <Route
   path="/admin/login"

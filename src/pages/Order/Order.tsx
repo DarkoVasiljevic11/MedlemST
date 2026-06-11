@@ -5,6 +5,7 @@ import products from "./Products";
 import ProductCard from "./CartCard";
 import Nav from "../../components/Nav";
 import pcela from "..//../assets/pcela.jpg";
+import { Helmet } from "react-helmet-async";
 export default function Shop() {
   const handleCart = (product: any) => {
     console.log("Added:", product);
@@ -22,7 +23,7 @@ export default function Shop() {
   }, [category]);
 
   const filteredProducts =
-    !category || category === "all"
+    !category || category === "sve"
       ? products
       : products.filter(
           (product) =>
@@ -42,9 +43,55 @@ export default function Shop() {
       currentPage *
         productsPerPage
     );
-
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: products.map(
+    (product, index) => ({
+      "@type": "Product",
+      position: index + 1,
+      name: product.title,
+      description: product.description.des,
+    })
+  ),
+};
   return (
     <>
+    <Helmet>
+    <title>Medlem - Poručite naš med</title>
+    <meta
+    name="description"
+    content="Pogledajte našu ponudu prirodnog bagremovog, livadskog i šumskog meda. Proizvedeno u Srbiji."
+  />
+
+  <meta
+    name="robots"
+    content="index,follow"
+  />
+
+  <link
+    rel="canonical"
+    href="https://medlem.rs/order"
+  />
+
+  <meta
+    property="og:title"
+    content="Medlem - Poručite naš med"
+  />
+
+  <meta
+    property="og:description"
+    content="Ponuda prirodnog domaćeg meda."
+  />
+
+  <meta
+    property="og:image"
+    content="https://medlem.rs/og-products.webp"
+  />
+   <script type="application/ld+json">
+  {JSON.stringify(schema)}
+</script>
+    </Helmet>
       <Nav />
     
      <section className="w-full bg-cream py-20 px-6 overflow-x-hidden">

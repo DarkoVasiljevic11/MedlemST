@@ -85,11 +85,11 @@ export default function Footer() {
           </span>
 
           <div className="flex gap-6">
-            <NavLink to="/privacy-policy" className={linkClass}>
+            <NavLink to="/politika-privatnosti" className={linkClass}>
               Privatnost
             </NavLink>
 
-            <NavLink to="/cookie-policy" className={linkClass}>
+            <NavLink to="/politika-kolačića" className={linkClass}>
               Kolačići
             </NavLink>
 

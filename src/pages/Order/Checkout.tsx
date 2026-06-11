@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import ErrorModal from "../../components/errorModal";
 import kamion from "..//..//assets/kamionsunset.jpg"
 import Nav from "../../components/Nav";
+import { Helmet } from "react-helmet-async";
 function ConfirmModal({
   show,
   onConfirm,
@@ -17,6 +18,8 @@ function ConfirmModal({
   if (!show) return null;
 
   return (
+    <>
+   
     <div
       onClick={onClose}
       className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
@@ -50,6 +53,7 @@ function ConfirmModal({
         </div>
       </div>
     </div>
+    </>
   );
 }
 export default function Checkout() {
@@ -217,6 +221,9 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
   if (success) {
     return (
       <>
+      <Helmet>
+  <title>Medlem - Hvala Vam na porudzbini</title>
+ </Helmet>
       <Nav />
       <div className="min-h-[80vh] flex items-center justify-center bg-cream px-4 py-16">
 
@@ -258,7 +265,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
         🚚 Očekujte kontakt u narednih 24–48h
       </div>
 
-      {/* BUTTON STYLE LINK (optional upgrade) */}
+      {/* BUTTON STYLE LINK */}
       <NavLink
         to="/order"
         className="mt-6 inline-block bg-honey hover:scale-105 transition text-brown px-6 py-3 rounded-xl font-semibold shadow-md font-bree"
@@ -275,6 +282,9 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
   }
 
   return (<>
+  <Helmet>
+  <title>Medlem - Potvrdite vašu porudzbinu</title>
+ </Helmet>
      <Nav />
     <ErrorModal
   show={showError}
@@ -425,7 +435,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
         {loading ? "Obradjivanje..." : "Potvrdi porudzbinu"}
       </button>
     </div>
-<div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 md:p-10 shadow-sm text-brown">
+<div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 md:p-10  text-brown">
   <h2 className="text-3xl font-bree text-center mb-8">
     Dostava i Plaćanje
   </h2>
@@ -438,7 +448,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
       Dostava
     </h3>
 
-    <ul className="space-y-3 list-disc pl-5 leading-7">
+    <ul className="space-y-3 list-disc pl-5 leading-7 text-brown">
      
       <li>
         Dostava se vrši na teritoriji Republike Srbije.
@@ -456,7 +466,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
       Načini plaćanja
     </h3>
 
-    <ul className="space-y-3 list-disc pl-5 leading-7">
+    <ul className="space-y-3 list-disc pl-5 leading-7 text-brown">
       <li>
         Plaćanje pouzećem prilikom preuzimanja pošiljke.
       </li>

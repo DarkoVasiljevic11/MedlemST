@@ -568,7 +568,7 @@ return (
             text-sm
             font-semibold
             font-bree
-            text-brownt
+            text-brown
             transition
             hover:scale-[1.02]
             shadow-md

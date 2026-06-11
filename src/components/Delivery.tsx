@@ -1,7 +1,28 @@
 import Nav from "./Nav";
+import { Helmet } from "react-helmet-async";
 export default function DostavaPlacanje() {
   return (
     <>
+    <Helmet>
+  <title>
+    Medlem - Dostava i Plaćanje
+  </title>
+
+  <meta
+    name="description"
+    content="Informacije o dostavi i plaćanju."
+  />
+
+  <meta
+    name="robots"
+    content="index,follow"
+  />
+
+  <link
+    rel="canonical"
+    href="https://medlem.rs/politika-kolacica"
+  />
+</Helmet>
     <Nav />
     <main className="max-w-4xl mx-auto px-6 py-24 font-bree text-brown mb-50">
       <h1 className="text-4xl font-bold mb-8">

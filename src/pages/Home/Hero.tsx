@@ -3,7 +3,7 @@ export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* VIDEO */}
-      <img src={kamionsunset} className="absolute inset-0 z-0 h-full w-full object-cover">
+      <img src={kamionsunset} loading="eager" className="absolute  inset-0 z-0 h-full w-full object-cover">
       
       
       </img>

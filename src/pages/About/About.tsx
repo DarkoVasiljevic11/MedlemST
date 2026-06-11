@@ -3,9 +3,42 @@ import proizvodi from "..//..//assets/prozivodimed/medkolekcija.jpg";
 import pcelinjak from "..//..//assets/pcelinjak.jpg";
 import GallerySection from "./Gallery";
 import Nav from "../../components/Nav";
+import { Helmet } from "react-helmet-async";
 function About() {
   return (
     <>
+    <Helmet>
+  <title>Medlem - Saznajte više o nama</title>
+   <meta
+    name="description"
+    content="Saznajte više o nama. Našem medu i našim pčelama i proizvodima."
+  />
+
+  <meta
+    name="robots"
+    content="index,follow"
+  />
+
+  <link
+    rel="canonical"
+    href="https://medlem.rs/about"
+  />
+
+  <meta
+    property="og:title"
+    content="Medlem - Saznajte više o nama"
+  />
+
+  <meta
+    property="og:description"
+    content="Saznajte vise o Medlemu."
+  />
+
+  <meta
+    property="og:image"
+    content="https://medlem.rs/og-contact.webp"
+  />
+ </Helmet>
     <Nav />
         <section className="w-full bg-cream py-20 px-6 overflow-x-hidden">
       

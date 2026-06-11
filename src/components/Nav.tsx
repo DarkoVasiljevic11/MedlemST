@@ -86,7 +86,7 @@ export default function Nav({ transparent = false }: NavProps) {
 
         {/* DESKTOP LINKS */}
         <div className="hidden sm:flex items-center space-x-2">
-          {["/", "/about", "/exp", "/order"].map((path, i) => {
+          {["/", "/onama", "/iskustva", "/poručite"].map((path, i) => {
             const labels = ["Početna", "O nama", "Iskustva", "Poručite"];
             return (
               <NavLink
@@ -112,7 +112,7 @@ export default function Nav({ transparent = false }: NavProps) {
         {/* CART */}
         <div className="items-center hidden sm:flex">
           <div className="relative ml-3">
-            <NavLink to="/checkout" className="cursor-pointer relative">
+            <NavLink to="/poručeno" className="cursor-pointer relative">
 
               <img
                 src={hasItems ? cartFull : cartEmpty}
@@ -143,7 +143,7 @@ export default function Nav({ transparent = false }: NavProps) {
             : "max-h-0 opacity-0 pointer-events-none"
         }`}
       >
-        {["/", "/about", "/exp", "/order"].map((path, i) => {
+        {["/", "/onama", "/iskustva", "/poručite"].map((path, i) => {
           const labels = ["Početna", "Ko smo mi?", "Iskustva", "Poručite"];
           return (
             <NavLink
@@ -166,7 +166,7 @@ export default function Nav({ transparent = false }: NavProps) {
         })}
 
         <NavLink
-          to="/checkout"
+          to="/poručeno"
           onClick={() => setMobileOpen(false)}
           className="block mt-2 ml-2"
         >

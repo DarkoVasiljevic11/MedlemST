@@ -1,7 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Link, useLocation } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
+import { NavLink } from "react-router-dom"
 type NavItem = {
   name: string;
   path: string;
@@ -14,19 +14,19 @@ type DropdownProps = {
 const navItems: NavItem[] = [
   {
     name: "Sve",
-    path: "/order/all",
+    path: "/poručite/sve",
   },
   {
     name: "Lekoviti med",
-    path: "/order/lekoviti",
+    path: "/poručite/lekoviti",
   },
   {
     name:"Med",
-    path:"/order/med"
+    path:"/poručite/med"
   },
   {
     name: "Med sa ukusom",
-    path: "/order/medsaukusom",
+    path: "/poručite/medsaukusom",
   },
 ];
 
@@ -42,31 +42,22 @@ export default function Dropdown({ buttonText = "Proizvodi" }: DropdownProps) {
         </span>
 
         {navItems.map((item) => {
-          const isActive = location.pathname === item.path;
-
+          
           return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`
-                relative rounded-full px-5 py-2.5 text-sm font-medium
-                transition-all duration-300 ease-out
-                border border-transparent
-                hover:scale-[1.03]
-                hover:shadow-md
-                ${
-                  isActive
-                    ? "bg-honey text-brown shadow-lg"
-                    : "bg-cream text-brown hover:honey"
-                }
-              `}
-            >
-              {item.name}
-
-              {isActive && (
-                <span className="absolute inset-x-3 -bottom-1 h-[3px] rounded-full bg-brownt/80" />
-              )}
-            </Link>
+           <NavLink
+  to={item.path}
+  className={({ isActive }) =>
+    `relative rounded-full px-5 py-2.5 text-sm font-medium
+     transition-all duration-300 ease-out
+     ${
+       isActive
+         ? "bg-honey text-brown shadow-lg"
+         : "bg-cream text-brown hover:bg-honey"
+     }`
+  }
+>
+  {item.name}
+</NavLink>
           );
         })}
       </div>
@@ -118,8 +109,8 @@ export default function Dropdown({ buttonText = "Proizvodi" }: DropdownProps) {
                             text-sm font-medium transition-all duration-200
                             ${
                               isActive
-                                ? "bg-ghoney text-brownt shadow-sm"
-                                : "text-brownt hover:bg-white/20"
+                                ? "bg-honey text-brown shadow-sm"
+                                : "text-brown hover:bg-cream"
                             }
                           `}
                         >

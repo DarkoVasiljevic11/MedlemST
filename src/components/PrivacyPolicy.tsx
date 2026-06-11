@@ -1,7 +1,28 @@
 import Nav from "./Nav";
+import { Helmet } from "react-helmet-async";
 export default function PrivacyPolicy() {
   return (
     <>
+    <Helmet>
+  <title>
+    Medlem - Politika privatnosti
+  </title>
+
+  <meta
+    name="description"
+    content="Saznajte kako Medlem prikuplja, koristi i štiti vaše lične podatke."
+  />
+
+  <meta
+    name="robots"
+    content="index,follow"
+  />
+
+  <link
+    rel="canonical"
+    href="https://medlem.rs/politika-privatnosti"
+  />
+</Helmet>
     <Nav />
     <main className="max-w-4xl mx-auto px-6 py-24 text-brown font-bree mb-50">
       <h1 className="text-4xl font-bold mb-8">
