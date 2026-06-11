@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useCart } from "../pages/Order/CartContext";
 import cartEmpty from "../../src/assets/cart.svg";
 import cartFull from "../../src/assets/carth.svg";
-
+import logo from "../../src/assets/medleml.svg";
 type NavProps = {
   transparent?: boolean;
 };
@@ -29,8 +29,8 @@ export default function Nav({ transparent = false }: NavProps) {
   >
     <img
       className="h-11 w-auto"
-      src="../../src/assets/medleml.svg"
-      alt="Medlem"
+      src={logo}
+      alt="Medlem Logo"
     />
   </a>
 </div>

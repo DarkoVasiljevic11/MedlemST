@@ -2,7 +2,7 @@ import Instagram from "./Ig";
 import Youtube from "./Yt";
 import Facebook from "./Fb";
 import { NavLink } from "react-router-dom";
-
+import logo from "..//../src/assets/medleml.svg";
 export default function Footer() {
   const linkClass =
     "text-cream/80 hover:text-honey transition-colors duration-300 text-body font-bree";
@@ -15,7 +15,7 @@ export default function Footer() {
           <div>
             <NavLink to="/" className="flex items-center gap-3">
               <img
-                src="../src/assets/medleml.svg"
+                src={logo}
                 className="h-20"
                 alt="Medlem Logo"
               />

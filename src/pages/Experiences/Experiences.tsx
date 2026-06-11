@@ -41,7 +41,7 @@ const [category, setCategory] = useState("Sve");
 
   <meta
     property="og:image"
-    content="https://medlem.rs/og-reviews.webp"
+    content="https://medlem.rs/og-products.webp"
   />
  </Helmet>
     <Nav />
