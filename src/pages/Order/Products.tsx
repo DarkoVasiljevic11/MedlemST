@@ -1,14 +1,14 @@
-import bronhi from "../../assets/prozivodimed/bronhim.jpg";
-import borovnica from "../../assets/prozivodimed/borovnicam.jpg";
-import bagrem from "../../assets/prozivodimed/bagrem.jpg";
-import imuno from "../../assets/prozivodimed/imunom.jpg";
-import jagoda from "../../assets/prozivodimed/jagodam.jpg";
-import kakao from "../../assets/prozivodimed/kakaom.jpg";
-import kopriva from "../../assets/prozivodimed/koprivam.jpg";
-import limun from "../../assets/prozivodimed/limunm.jpg";
-import livadski from "../../assets/prozivodimed/livadskim.jpg";
-import malina from "../../assets/prozivodimed/malina.jpg";
-import propolis from "../..//assets/prozivodimed/propolis.jpg";
+import bronhi from "../../assets/prozivodimed/bronhim-product.webp";
+import borovnica from "../../assets/prozivodimed/borovnicam-product.webp";
+import bagrem from "../../assets/prozivodimed/bagrem-product.webp";
+import imuno from "../../assets/prozivodimed/imunom-product.webp";
+import jagoda from "../../assets/prozivodimed/jagodam-product.webp";
+import kakao from "../../assets/prozivodimed/kakaom-product.webp";
+import kopriva from "../../assets/prozivodimed/koprivam-product.webp";
+import limun from "../../assets/prozivodimed/limunm-product.webp";
+import livadski from "../../assets/prozivodimed/livadskim-product.webp";
+import malina from "../../assets/prozivodimed/malina-product.webp";
+import propolis from "../..//assets/prozivodimed/propolis-product.webp";
 
 
 const products = [
@@ -19,11 +19,11 @@ const products = [
       slug:"lekoviti"},
       title: "Bronhi Med",
       description:{des:"Prirodno olakšanje za vaše disajne puteve i moćan saveznik u borbi protiv prehlada. Ovaj proizvod predstavlja pažljivo izbalansiranu mešavinu našeg kristalizovanog livadskog meda i pet moćnih, lekovitih trava: anisa, podbela, bokvice, vranilove trave i omana. Kombinacija ovih biljaka u mednoj bazi stvara jedinstveni prirodni sirup koji efikasno umiruje disajne organe i donosi trenutni osećaj olakšanja.",
-      prof:`Profil ukusa i mirisa:\n Intenzivan, bogat i izuzetno osvežavajući miris i ukus koji nose prepoznatljivu, prijatnu aromu mente, ostavljajući dugotrajan osećaj svežine u grlu. 
+      prof:`Profil ukusa i mirisa: Intenzivan, bogat i izuzetno osvežavajući miris i ukus koji nose prepoznatljivu, prijatnu aromu mente, ostavljajući dugotrajan osećaj svežine u grlu. 
       
-      Tekstura:\n Gusta, kompaktna i ujednačena kremasta mešavina prirodne, tamnije biljne nijanse.
+      Tekstura: Gusta, kompaktna i ujednačena kremasta mešavina prirodne, tamnije biljne nijanse.
 
-      Zašto ćete ga voleti:\n Ova sinergija pet lekovitih biljaka tradicionalno se koristi za ublažavanje kašlja, Razređivanje i lakše iskašljavanje sekreta, kao i za smirivanje iziritiranog grla. Deluje antiseptički i protivupalno, pružajući brzu pomoć kod bronhitisa, prehlada i sezonskih respiratornih tegoba. 
+      Zašto ćete ga voleti: Ova sinergija pet lekovitih biljaka tradicionalno se koristi za ublažavanje kašlja, Razređivanje i lakše iskašljavanje sekreta, kao i za smirivanje iziritiranog grla. Deluje antiseptički i protivupalno, pružajući brzu pomoć kod bronhitisa, prehlada i sezonskih respiratornih tegoba. 
       
       Kako koristiti: Preporučuje se uzimanje 2-3 puta dnevno po jedna drvena ili plastična kašičica, najbolje pola sata pre obroka. Mešavinu lagano otopite u ustima kako bi biljne esencije obložile sluzokožu ždrela, ili je razmutite u šolji mlakog čaja. `,
       tec:`Tehnički podaci: 

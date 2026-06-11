@@ -26,7 +26,7 @@ const [category, setCategory] = useState("Sve");
 
   <link
     rel="canonical"
-    href="https://medlem.rs/exp"
+    href="https://medlem.rs/iskustva"
   />
 
   <meta

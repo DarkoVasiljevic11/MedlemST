@@ -1,5 +1,5 @@
-import kamionet from "..//..//assets/kamionsunset.jpg";
-import proizvodi from "..//..//assets/prozivodimed/medkolekcija.jpg";
+import kamionet from "..//..//assets/ksunset.png";
+import proizvodi from "..//..//assets/prozivodimed/medkolekcija-product.webp";
 import pcelinjak from "..//..//assets/pcelinjak.jpg";
 import GallerySection from "./Gallery";
 import Nav from "../../components/Nav";
@@ -21,7 +21,7 @@ function About() {
 
   <link
     rel="canonical"
-    href="https://medlem.rs/about"
+    href="https://medlem.rs/onama"
   />
 
   <meta
@@ -36,7 +36,7 @@ function About() {
 
   <meta
     property="og:image"
-    content="https://medlem.rs/og-contact.webp"
+    content="https://medlem.rs/og-about.webp"
   />
  </Helmet>
     <Nav />

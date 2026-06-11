@@ -3,7 +3,7 @@ import { useState } from "react";
 import { sendOrderEmail } from "./emailService";
 import { NavLink } from "react-router-dom";
 import ErrorModal from "../../components/errorModal";
-import kamion from "..//..//assets/kamionsunset.jpg"
+import kamion from "..//..//assets/ksunset.png"
 import Nav from "../../components/Nav";
 import { Helmet } from "react-helmet-async";
 function ConfirmModal({
@@ -243,7 +243,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
 
       {/* BACK LINK */}
       <NavLink
-        to="/order"
+        to="/poručite"
         className="inline-block mb-6 text-sm text-honey hover:text-brown font-bree transition font-medium"
       >
         ← Nazad na poručivanje
@@ -267,7 +267,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
 
       {/* BUTTON STYLE LINK */}
       <NavLink
-        to="/order"
+        to="/poručite"
         className="mt-6 inline-block bg-honey hover:scale-105 transition text-brown px-6 py-3 rounded-xl font-semibold shadow-md font-bree"
       >
         Nastavi kupovinu
@@ -284,6 +284,35 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
   return (<>
   <Helmet>
   <title>Medlem - Potvrdite vašu porudzbinu</title>
+  <meta
+    name="description"
+    content="Pogledajte našu ponudu prirodnog bagremovog, livadskog i šumskog meda. Proizvedeno u Srbiji."
+  />
+
+  <meta
+    name="robots"
+    content="index,follow"
+  />
+
+  <link
+    rel="canonical"
+    href="https://medlem.rs/poručeno"
+  />
+
+  <meta
+    property="og:title"
+    content="Medlem - Potvrdite vašu porudzbinu"
+  />
+
+  <meta
+    property="og:description"
+    content="Ponuda prirodnog domaćeg meda."
+  />
+
+  <meta
+    property="og:image"
+    content="https://medlem.rs/og-products.webp"
+  />
  </Helmet>
      <Nav />
     <ErrorModal

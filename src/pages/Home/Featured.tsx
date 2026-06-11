@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import bagrem from "../../assets/prozivodimed/bagrem.jpg";
-import livadski from "../../assets/prozivodimed/livadskim.jpg";
-import malina from "../../assets/prozivodimed/malina.jpg";
+import bagrem from "../../assets/prozivodimed/bagrem-product.webp";
+import livadski from "../../assets/prozivodimed/livadskim-product.webp";
+import malina from "../../assets/prozivodimed/malina-product.webp";
 const featuredProducts = [
   {
     id: 1,
@@ -53,7 +53,7 @@ export default function FeaturedProducts() {
               key={product.id}
               className="group overflow-hidden rounded-3xl bg-white shadow-md hover:shadow-xl transition-all duration-300"
             >
-              <NavLink to="/order" className=" block overflow-hidden">
+              <NavLink to="/poručite" className=" block overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -85,7 +85,7 @@ export default function FeaturedProducts() {
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <NavLink
-            to="/order"
+            to="/poručite"
             className="inline-flex items-center gap-2 rounded-xl bg-honey px-8 py-4 font-semibold text-brown font-bree transition hover:scale-105"
           >
             Pogledaj sve proizvode →

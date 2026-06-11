@@ -37,13 +37,13 @@ export default function Footer() {
 
             <ul className="space-y-3">
               <li>
-                <NavLink to="/privacy-policy" className={linkClass}>
+                <NavLink to="/politika-privatnosti" className={linkClass}>
                   Politika privatnosti
                 </NavLink>
               </li>
 
               <li>
-                <NavLink to="/cookie-policy" className={linkClass}>
+                <NavLink to="/politika-kolačića" className={linkClass}>
                   Politika kolačića
                 </NavLink>
               </li>
@@ -84,19 +84,7 @@ export default function Footer() {
             © 2026 Medlem. Sva prava zadržana.
           </span>
 
-          <div className="flex gap-6">
-            <NavLink to="/politika-privatnosti" className={linkClass}>
-              Privatnost
-            </NavLink>
-
-            <NavLink to="/politika-kolačića" className={linkClass}>
-              Kolačići
-            </NavLink>
-
-            <NavLink to="/dostava-i-placanje" className={linkClass}>
-              Dostava
-            </NavLink>
-          </div>
+          
         </div>
       </div>
     </footer>

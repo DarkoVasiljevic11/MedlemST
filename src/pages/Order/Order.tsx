@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import products from "./Products";
@@ -6,6 +6,7 @@ import ProductCard from "./CartCard";
 import Nav from "../../components/Nav";
 import pcela from "..//../assets/pcela.jpg";
 import { Helmet } from "react-helmet-async";
+
 export default function Shop() {
   const handleCart = (product: any) => {
     console.log("Added:", product);
@@ -55,10 +56,26 @@ const schema = {
     })
   ),
 };
+
+
+const productsRef = useRef<HTMLElement | null>(null);
+const firstLoad = useRef(true);
+
+useEffect(() => {
+  if (firstLoad.current) {
+    firstLoad.current = false;
+    return; // do nothing on initial page load
+  }
+
+  productsRef.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}, [category]);
   return (
     <>
     <Helmet>
-    <title>Medlem - Poručite naš med</title>
+    <title>Medlem - Poručite naš domaći med</title>
     <meta
     name="description"
     content="Pogledajte našu ponudu prirodnog bagremovog, livadskog i šumskog meda. Proizvedeno u Srbiji."
@@ -71,7 +88,7 @@ const schema = {
 
   <link
     rel="canonical"
-    href="https://medlem.rs/order"
+    href="https://medlem.rs/poručite"
   />
 
   <meta
@@ -124,7 +141,7 @@ const schema = {
 </div>
       <Dropdown buttonText="Kategorije" />
 
-      <section className="container mx-auto px-4 py-8">
+      <section  ref={productsRef} className="container mx-auto px-4 py-8">
         <div
           className="
             grid

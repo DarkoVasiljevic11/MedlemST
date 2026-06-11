@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Nav from "./Nav";
+
 import { initializeAnalytics } from "../analytics";
 
 export default function CookieBanner() {
@@ -30,7 +30,7 @@ export default function CookieBanner() {
 
   return (
     <>
-    <Nav />
+    
     <div className="fixed bottom-1 left-4 right-4 z-50 mx-auto max-w-3xl rounded-2xl bg-cream border border-honey font-bree shadow-xl p-5 mb-20">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
