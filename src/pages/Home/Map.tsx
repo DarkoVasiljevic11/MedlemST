@@ -54,14 +54,7 @@ export default function MapSection() {
 
             </div>
 
-            <a
-              href="https://www.google.com/maps?q=44.1200345,19.48342"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-10 w-fit rounded-xl bg-honey px-6 py-3 text-brown font-bree font-semibold transition-all duration-300 hover:scale-105"
-            >
-              Otvori u Google Mapama
-            </a>
+            
           </div>
 
           {/* RIGHT SIDE */}
@@ -71,8 +64,8 @@ export default function MapSection() {
               className="h-full w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?ll=44.1200345,19.48342&z=18&t=m&output=embed"
-            />
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2864.2212891459394!2d19.48098455107031!3d44.120057577223626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4759a574fc29f7e9%3A0x1db4a07b4d08c242!2z0JzQtdC00LvQtdC8!5e0!3m2!1ssr!2srs!4v1781262101941!5m2!1ssr!2srs" 
+              />
           </div>
         </div>
       </div>
