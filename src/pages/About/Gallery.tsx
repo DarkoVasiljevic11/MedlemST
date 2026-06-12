@@ -117,7 +117,7 @@ const itemsToShow = items.slice(0, 9);
               {item.type === "video" && (
                 <button
                   onClick={() => handleVideoToggle(item)}
-                  className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full border border-white/30"
+                  className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full border border-white/30 cursor-pointer"
                 >
                   {playingVideoId === item.id ? (
                     <Pause className="text-white" size={18} />
@@ -141,7 +141,7 @@ const itemsToShow = items.slice(0, 9);
         <div className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center">
           {/* CLOSE */}
           <button
-            className="absolute top-6 right-6 text-white text-3xl"
+            className="absolute top-6 right-6 text-white text-3xl cursor-pointer"
             onClick={() => setLightboxIndex(null)}
           >
             ✕
@@ -149,7 +149,7 @@ const itemsToShow = items.slice(0, 9);
 
           {/* PREV */}
           <button
-            className="absolute left-6 text-white text-4xl"
+            className="absolute left-6 text-white text-4xl cursor-pointer"
             onClick={() =>
               setLightboxIndex((prev) =>
                 prev === 0 ? items.length - 1 : (prev ?? 0) - 1
@@ -177,7 +177,7 @@ const itemsToShow = items.slice(0, 9);
 
           {/* NEXT */}
           <button
-            className="absolute right-6 text-white text-4xl"
+            className="absolute right-6 text-white text-4xl cursor-pointer"
             onClick={() =>
               setLightboxIndex((prev) =>
                 prev === items.length - 1 ? 0 : (prev ?? 0) + 1

@@ -45,7 +45,7 @@ const [category, setCategory] = useState("Sve");
   />
  </Helmet>
     <Nav />
-    <main className="min-h-screen bg-cream">
+    <main className="min-h-screen bg-cream mt-10">
       <ExperienceHero onOpen={() => setShowModal(true)} />
 
       <div className="max-w-7xl mx-auto px-4 py-8">

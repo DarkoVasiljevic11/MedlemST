@@ -16,7 +16,7 @@ function Home() {
     })}
   </script>
 </Helmet>
-      <Nav transparent />
+      <Nav />
       <Hero />
       <FeaturedProducts />
       <MapSection />

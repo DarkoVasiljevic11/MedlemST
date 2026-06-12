@@ -40,7 +40,7 @@ function About() {
   />
  </Helmet>
     <Nav />
-        <section className="w-full bg-cream py-20 px-6 overflow-x-hidden">
+        <section className="w-full bg-cream py-20 px-6 overflow-x-hidden mt-10">
       
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-12">
 
@@ -162,9 +162,19 @@ Ponosno vam donosimo „sladak spoj prirode“ – čist, neiskvaren med pravo s
 
       </div>
     </section>
-    <div className="w-full flex justify-center my-5">
-  <div className="w-2 h-2 bg-honey rounded-full opacity-60" />
-</div>
+     <div className="flex items-center justify-center py-16">
+      <div className="flex items-center gap-4 w-full max-w-4xl">
+        <div className="h-px flex-1 bg-white/10" />
+
+        <div className="relative">
+          <div className="absolute inset-0 bg-amber-500/30 blur-lg" />
+          <div className="relative h-2 w-20 rounded-full bg-gradient-to-r from-amber-500 to-orange-500" />
+        </div>
+
+        <div className="h-px flex-1 bg-white/10" />
+      </div>
+    </div>
+
     <GallerySection />
 
     </>

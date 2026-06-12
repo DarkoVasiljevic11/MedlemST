@@ -34,97 +34,103 @@ export default function Dropdown({ buttonText = "Proizvodi" }: DropdownProps) {
   const location = useLocation();
 
   return (
-    <div className="w-full  bg-cream mb-40 ">
-      {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center gap-3 px-6 py-4">
-        <span className="text-brown font-semibold text-sm tracking-wide uppercase mr-2">
+  <>
+    {/* Desktop Navigation */}
+    <div className="hidden md:flex justify-center py-6">
+      <div className="inline-flex items-center gap-3 rounded-full bg-white/40 p-2 backdrop-blur-sm">
+        <span className="px-3 text-sm font-semibold uppercase tracking-wide text-brown">
           {buttonText}
         </span>
 
-        {navItems.map((item) => {
-          
-          return (
-           <NavLink
-  to={item.path}
-  className={({ isActive }) =>
-    `relative rounded-full px-5 py-2.5 text-sm font-medium
-     transition-all duration-300 ease-out
-     ${
-       isActive
-         ? "bg-honey text-brown shadow-lg"
-         : "bg-cream text-brown hover:bg-honey"
-     }`
-  }
->
-  {item.name}
-</NavLink>
-          );
-        })}
-      </div>
-
-      {/* Mobile Navigation */}
-      <div className="md:hidden px-4 py-4">
-        <Menu as="div" className="relative w-full">
-          {({ open }) => (
-            <>
-              <MenuButton
-                className={`
-                  flex w-full items-center justify-between
-                  rounded-2xl border border-white/40
-                  bg-ghoney px-4 py-3
-                  text-sm font-semibold text-brownt
-                  shadow-md backdrop-blur-sm
-                  transition-all duration-200
-                  hover:shadow-lg
-                  ${open ? "scale-[1.01]" : ""}
-                `}
-              >
-                <span>{buttonText}</span>
-
-                {open ? (
-                  <XMarkIcon className="h-5 w-5" />
-                ) : (
-                  <Bars3Icon className="h-5 w-5" />
-                )}
-              </MenuButton>
-
-              <MenuItems
-                className="
-                  absolute left-0 right-0 z-50 mt-3
-                  overflow-hidden rounded-2xl
-                  bg-dhoney/95 backdrop-blur-xl
-                  shadow-2xl ring-1 ring-black/5
-                "
-              >
-                <div className="p-2">
-                  {navItems.map((item) => {
-                    const isActive = location.pathname === item.path;
-
-                    return (
-                      <MenuItem key={item.path}>
-                        <Link
-                          to={item.path}
-                          className={`
-                            flex items-center rounded-xl px-4 py-3
-                            text-sm font-medium transition-all duration-200
-                            ${
-                              isActive
-                                ? "bg-honey text-brown shadow-sm"
-                                : "text-brown hover:bg-cream"
-                            }
-                          `}
-                        >
-                          {item.name}
-                        </Link>
-                      </MenuItem>
-                    );
-                  })}
-                </div>
-              </MenuItems>
-            </>
-          )}
-        </Menu>
+        {navItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) =>
+              `
+              rounded-full
+              px-5
+              py-2.5
+              text-sm
+              font-medium
+              transition-all
+              duration-300
+              ${
+                isActive
+                  ? "bg-honey text-brown shadow-lg"
+                  : "text-brown hover:bg-cream"
+              }
+            `
+            }
+          >
+            {item.name}
+          </NavLink>
+        ))}
       </div>
     </div>
-  );
+
+    {/* Mobile Navigation */}
+    <div className="md:hidden px-4 py-4">
+      <Menu as="div" className="relative w-full">
+        {({ open }) => (
+          <>
+            <MenuButton
+              className={`
+                flex w-full items-center justify-between
+                rounded-2xl border border-white/40
+                bg-honey px-4 py-3
+                text-sm font-semibold text-brown
+                shadow-md backdrop-blur-sm
+                transition-all duration-200
+                ${open ? "scale-[1.01]" : ""}
+              `}
+            >
+              <span>{buttonText}</span>
+
+              {open ? (
+                <XMarkIcon className="h-5 w-5" />
+              ) : (
+                <Bars3Icon className="h-5 w-5" />
+              )}
+            </MenuButton>
+
+            <MenuItems
+              className="
+                absolute left-0 right-0 z-50 mt-3
+                overflow-hidden rounded-2xl
+                bg-dhoney/95 backdrop-blur-xl
+                shadow-2xl ring-1 ring-black/5
+              "
+            >
+              <div className="p-2">
+                {navItems.map((item) => {
+                  const isActive = location.pathname === item.path;
+
+                  return (
+                    <MenuItem key={item.path}>
+                      <Link
+                        to={item.path}
+                        className={`
+                          flex items-center rounded-xl px-4 py-3
+                          text-sm font-medium transition-all duration-200
+                          ${
+                            isActive
+                              ? "bg-honey text-brown shadow-sm"
+                              : "text-brown hover:bg-cream"
+                          }
+                        `}
+                      >
+                        {item.name}
+                      </Link>
+                    </MenuItem>
+                  );
+                })}
+              </div>
+            </MenuItems>
+          </>
+        )}
+      </Menu>
+    </div>
+  </>
+);
 }

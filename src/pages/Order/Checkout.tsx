@@ -22,7 +22,7 @@ function ConfirmModal({
    
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 "
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -225,9 +225,9 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
   <title>Medlem - Hvala Vam na porudzbini</title>
  </Helmet>
       <Nav />
-      <div className="min-h-[80vh] flex items-center justify-center bg-cream px-4 py-16">
+      <div className="min-h-[80vh] flex items-center justify-center bg-cream px-4 py-16 mt-30">
 
-  <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+  <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row ">
 
     {/* IMAGE SIDE */}
     <div className="w-full md:w-1/2 h-64 md:h-auto">
@@ -328,7 +328,7 @@ const [showClearConfirm, setShowClearConfirm] = useState(false);
     setShowClearConfirm(false);
   }}
 />
-    <div className="mt-20 mb-20 max-w-2xl mx-auto ">
+    <div className="mt-30 mb-20 max-w-2xl mx-auto ">
       <h1 className="text-2xl text-brown font-bold font-bree mb-6 text-center">
         Potvrdite porudzbinu
       </h1>

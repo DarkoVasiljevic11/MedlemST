@@ -1,24 +1,40 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "../pages/Order/CartContext";
 import cartEmpty from "../../src/assets/cart.svg";
 import cartFull from "../../src/assets/carth.svg";
 import logo from "../../src/assets/medleml.svg";
-type NavProps = {
-  transparent?: boolean;
-};
-export default function Nav({ transparent = false }: NavProps) {
+import { useLocation } from "react-router-dom";
+
+
+export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { cart } = useCart();
   const hasItems = cart.length > 0;
+  const [scrolled, setScrolled] = useState(false);
+const location = useLocation();
+
+useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 20);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   return (
-    <nav className={`${
-    transparent
-      ? "absolute top-0 left-0 w-full z-50"
-      : "relative bg-cream"
-  } after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10`}>
-      
+  <nav
+  className={`
+    fixed top-0 left-0 w-full z-50
+    transition-all duration-500
+    ${
+      location.pathname === "/" && !scrolled
+        ? "bg-transparent"
+        : "bg-cream/90 backdrop-blur-md shadow-sm"
+    }
+  `}
+>   
       {/* TOP BAR */}
       <div className="flex relative flex-1 items-center justify-between p-4 container mx-auto">
       {/*Logo */}
@@ -97,7 +113,7 @@ export default function Nav({ transparent = false }: NavProps) {
                   `rounded-md px-3 py-2 text-base font-bree transition ${
                     isActive
                       ? "bg-honey text-brown"
-                      : transparent
+                      : location.pathname === "/" && !scrolled
                       ? "text-cream hover:bg-white/10 hover:text-honey"
                       : "text-brown hover:bg-honey hover:text-brown"
                   }`
@@ -154,7 +170,7 @@ export default function Nav({ transparent = false }: NavProps) {
                 `block rounded-md px-3 py-2 text-base font-bree transition ${
                   isActive
                     ? "bg-honey text-brown"
-                    : transparent
+                    : location.pathname === "/" && !scrolled
                     ? "text-cream hover:bg-white/10 hover:text-honey"
                     : "text-brown hover:bg-honey hover:text-brown"
                 }`
