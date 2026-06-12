@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useCart } from "./CartContext";
 import CartToast from "./CartToast";
-
+import close from "../../assets/closex.svg";
 interface ProductCardProps {
   id: number | string;
   image: string;
@@ -311,7 +311,7 @@ return (
   "
 >
   <img
-    src="../../src/assets/closex.svg"
+    src={close}
     alt="close"
     className="w-5 h-5"
   />

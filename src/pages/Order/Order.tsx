@@ -6,9 +6,31 @@ import ProductCard from "./CartCard";
 import Nav from "../../components/Nav";
 import pcela from "..//../assets/pcela.jpg";
 import { Helmet } from "react-helmet-async";
-
+import { useCart } from "./CartContext";
+import CartSummary from "./CartSummary";
+import emptyicon from "../../assets/cart.svg";
+import fullicon from "../../assets/carth.svg";
+import { useNavigate } from "react-router-dom";
 export default function Shop() {
+  
+ const { cart } = useCart();
+
+const itemCount = cart.reduce(
+  (sum: number, item: any) =>
+    sum + item.quantity,
+  0
+);
+
+const cartTotal = cart.reduce(
+  (sum: number, item: any) =>
+    sum + item.price * item.quantity,
+  0
+);
+
+  const navigate = useNavigate();
+
   const handleCart = (product: any) => {
+    
     console.log("Added:", product);
   };
 
@@ -72,6 +94,8 @@ useEffect(() => {
     block: "start",
   });
 }, [category]);
+ 
+
   return (
     <>
     <Helmet>
@@ -140,7 +164,16 @@ useEffect(() => {
   <div className="w-2 h-2 bg-honey rounded-full opacity-60" />
 </div>
       <Dropdown buttonText="Kategorije" />
-
+  <CartSummary
+  itemCount={itemCount}
+  total={cartTotal}
+  emptyIcon={emptyicon}
+  fullIcon={fullicon}
+  
+  onClick={() => navigate("/poručeno")
+    
+  }
+/>
       <section  ref={productsRef} className="container mx-auto px-4 py-8">
         <div
           className="
