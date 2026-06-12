@@ -153,7 +153,7 @@ useEffect(() => {
 
       {/* MOBILE MENU (SMOOTH ANIMATION) */}
       <div
-        className={`sm:hidden px-2 pt-2 pb-3 space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`sm:hidden px-2 pt-2 pb-3 space-y-1 overflow-hidden transition-all duration-300 ease-in-out backdrop-blur-md ${
           mobileOpen
             ? "max-h-[400px] opacity-100"
             : "max-h-0 opacity-0 pointer-events-none"
