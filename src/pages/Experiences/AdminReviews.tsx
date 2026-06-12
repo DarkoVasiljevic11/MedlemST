@@ -200,7 +200,7 @@ const displayedReviews =
   return (
     <>
     <Nav />
-    <main className="min-h-screen bg-cream py-12">
+    <main className="min-h-screen bg-cream py-12 mt-20">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
